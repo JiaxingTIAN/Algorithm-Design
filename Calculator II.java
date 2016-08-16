@@ -9,9 +9,9 @@ public class Solution {
         int num = 0;
         char sign = '+';
         for(int i=0;i<len;i++){
-            if(Charater.isDigit(str[i]))
+            if(Character.isDigit(str[i]))
                 num = num*10 + str[i];
-            if((!Charater.isDigit(str[i]) && str[i]!=' ')||i==len-1){
+            if((!Character.isDigit(str[i]) && str[i]!=' ')||i==len-1){
                 if(sign=='+') stack.push(num);
                 else if(stack=='-') stack.push(-num);
                 else if(stack=='*') stack.push(stack.pop()*num);    
