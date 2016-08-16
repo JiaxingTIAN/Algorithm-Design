@@ -61,4 +61,3 @@ public class MyMergeSort {
  
     }
 }
-- See more at: http://www.java2novice.com/java-sorting-algorithms/merge-sort/#sthash.mP11bZGb.dpuf
