@@ -18,3 +18,14 @@ public class Solution {
         return true;
     }
 }
+//Recursion Solution
+public class Solution {
+    public boolean helper(TreeNode cur, Integer min, Integer max){
+        if(cur==null) return true;
+        if((min!=null&&cur.val<=min)||(max!=null&&cur.val>=max)) return false;
+        return helper(cur.left, min, cur.val)&&helper(cur.right, cur.val, max);
+    }
+    public boolean isValidBST(TreeNode root) {
+        return helper(root, null, null);
+    }
+}
