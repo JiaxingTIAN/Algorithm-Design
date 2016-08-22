@@ -1,29 +1,22 @@
 public class Solution {
+    Map<String, PriorityQueue<String>> flights;
+    LinkedList<String> path;
+
     public List<String> findItinerary(String[][] tickets) {
-        Map<String, PriorityQueue<String>> v = new HashMap();
-        for(String[] str:tickets){
-            if(!v.containsKey(str[0]))
-                v.put(str[0], new PriorityQueue<String>((s1,s2)->(s1.compareTo(s2))));
-            v.get(str[0]).add(str[1]);
+        flights = new HashMap<>();
+        path = new LinkedList<>();
+        for (String[] ticket : tickets) {
+            flights.putIfAbsent(ticket[0], new PriorityQueue<>());
+            flights.get(ticket[0]).add(ticket[1]);
         }
-        List<String> res = new LinkedList();
-        String start = "JFK";
-        //dfs(tickets, res, v, start);
-        Stack<String> stack = new Stack();
-        stack.push(start);
-        while(!stack.isEmpty()){
-            while(v.containsKey(stack.peek()) && !v.get(stack.peek()).isEmpty())
-                stack.push(v.get(stack.peek()).poll());
-            res.add(0, stack.pop());
-        }
-        return res;
+        dfs("JFK");
+        return path;
     }
-    
-    
-    public void dfs(String[][]tickets, List res, Map<String, PriorityQueue<String>> v, String start){
-        while(v.containsKey(start) && !v.get(start).isEmpty()){
-            dfs(tickets, res, v, v.get(start).poll());
-        }
-        res.add(0, start);
+
+    public void dfs(String departure) {
+        PriorityQueue<String> arrivals = flights.get(departure);
+        while (arrivals != null && !arrivals.isEmpty())
+            dfs(arrivals.poll());
+        path.addFirst(departure);
     }
 }
