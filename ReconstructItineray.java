@@ -8,9 +8,18 @@ public class Solution {
         }
         List<String> res = new LinkedList();
         String start = "JFK";
-        dfs(tickets, res, v, start);
+        //dfs(tickets, res, v, start);
+        Stack<String> stack = new Stack();
+        stack.push(start);
+        while(!stack.isEmpty()){
+            while(v.containsKey(stack.peek()) && !v.get(stack.peek()).isEmpty())
+                stack.push(v.get(stack.peek()).poll());
+            res.add(0, stack.pop());
+        }
         return res;
     }
+    
+    
     public void dfs(String[][]tickets, List res, Map<String, PriorityQueue<String>> v, String start){
         while(v.containsKey(start) && !v.get(start).isEmpty()){
             dfs(tickets, res, v, v.get(start).poll());
