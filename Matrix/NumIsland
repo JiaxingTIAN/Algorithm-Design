@@ -1,0 +1,25 @@
+public class Solution {
+    public int numIslands(char[][] grid) {
+        int count = 0;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]=='1'){
+                    count++;
+                    island(grid,i,j);
+                }
+            }
+        }
+        return count;
+    }
+    
+    public void island(char[][]grid, int row, int col){
+        int n=grid.length;
+        int m=grid[0].length;
+        if(row<0||row>=n||col<0||col>=m||grid[row][col]!='1') return;
+        grid[row][col]='0';
+        island(grid,row-1,col);
+        island(grid,row+1,col);
+        island(grid,row,col+1);
+        island(grid,row,col-1);
+    }
+}
