@@ -48,4 +48,18 @@ Elements of input arrays can be modified.
 */
 public class Solution{
   public int solve(int[] nums){
-    
+    if(nums==null||nums.length==0) return -1;
+    if(nums.length<2) return 0;
+    int[] left = new int[nums.length];
+    int[] right = new int[nums.length];
+    left[1] = nums[0];
+    right[nums.length-2] = nums[nums.length-1];
+    for(int i=0;i<nums.length;i++){
+      if(i>1) left[i] = left[i-1] + nums[i-1];
+      if(i<nums.length-1) right[i] = right[i+1] + nums[i+1];
+    }
+    for(int i=0;i<nums.length;i++)
+      if(left[i]==right[i]) return i;
+    return -1;
+  }
+}
