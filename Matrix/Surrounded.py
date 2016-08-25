@@ -1,3 +1,4 @@
+# The key to avoid stack overflow is to use a queue instead of recursion
 def solve(self, board):
     if not any(board): return
 
