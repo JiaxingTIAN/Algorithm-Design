@@ -15,4 +15,17 @@ public class Solution {
         }
         return result;
     }
+    //Using two pointer
+    public int[] twoSum2(int[] nums, int target) {
+        //Using Hash Table
+        Arrays.sort(nums);
+        int l = 0, r = nums.length;
+        while(l<r){
+            int sum = nums[l]+nums[r];
+            if(sum==target) return new int[]{l, r};
+            else if(sum>target) r--;
+            else l++;
+        }
+        return -1;
+    }
 }
