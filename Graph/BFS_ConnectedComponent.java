@@ -14,7 +14,7 @@ public class Solution {
     public List<List<Integer>> connectedSet(ArrayList<UndirectedGraphNode> nodes) {
         // Write your code here
         List<List<Integer>> ans = new ArrayList<>();
-        Map<UndirectedGraphNode, boolean> visited = new HashMap<>();
+        Map<UndirectedGraphNode, Boolean> visited = new HashMap<>();
         for(UndirectedGraphNode node: nodes){
             visited.put(node, false);
         }
@@ -27,7 +27,7 @@ public class Solution {
         return ans;
     }
     
-    public void bfs(UndirectedGraphNode node, HashMap visited, List ans){
+    public void bfs(UndirectedGraphNode node, Map visited, List ans){
         List<Integer> list = new ArrayList<>();
         Queue<UndirectedGraphNode> queue = new LinkedList<>();
         
@@ -38,7 +38,7 @@ public class Solution {
             UndirectedGraphNode n = queue.poll();
             list.add(n.label);
             for(UndirectedGraphNode nei:n.neighbors){
-                if(!visited.get(nei)){
+                if(visited.get(nei)==false){
                     queue.offer(nei);
                     visited.put(nei,true);
                 }
