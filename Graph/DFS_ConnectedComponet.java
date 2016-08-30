@@ -46,3 +46,39 @@ public class Solution {
         ans.add(list);
     }
 }
+
+
+public class Solution {
+    /**
+     * @param nodes a array of Undirected graph node
+     * @return a connected set of a Undirected graph
+     */
+    public List<List<Integer>> connectedSet(ArrayList<UndirectedGraphNode> nodes) {
+        // Write your code here
+        List<List<Integer>> ans = new ArrayList<>();
+        Map<UndirectedGraphNode, Boolean> visited = new HashMap<>();
+        for(UndirectedGraphNode node:nodes){
+            visited.put(node, false);
+        }
+        
+        for(UndirectedGraphNode node:nodes){
+            if(!visited.get(node)){
+                List<Integer> list = new ArrayList<>();
+                dfs(node, visited, list);
+                Collections.sort(list);
+                ans.add(list);
+            }    
+        }
+        
+        return ans;
+    }
+    
+    public void dfs(UndirectedGraphNode node, Map visited, List list){
+        list.add(node.label);
+        visited.put(node, true);
+        for(UndirectedGraphNode nei:node.neighbors){
+            if(visited.get(nei)==false)
+                dfs(nei, visited, list);
+        }
+    }
+}
