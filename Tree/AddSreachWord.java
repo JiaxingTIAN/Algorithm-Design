@@ -1,59 +1,53 @@
 public class WordDictionary {
-    class TrieNode{
-        boolean word;
-        TrieNode[] children;
-        public TrieNode(){
-            word = false;
-            children = new TrieNode[26];
-        }
-    }
-    class Trie{
-        
-        TrieNode root;
-        public Trie(){
-            root = new TrieNode();
-        }
-        public void insert(String word){
-            TrieNode cur = root;
-            char[] ch = word.toCharArray();
-            for(int i=0;i<ch.length;i++){
-                if(cur.children[ch[i]-'a']==null) cur.children[ch[i]-'a'] = new TrieNode();
-                cur = cur.children[ch[i]-'a'];
-            }
-            cur.word = true;
-        }
-
-        public boolean dfs(String word, int idx, TrieNode cur){
-            if(idx == word.length())
-                return cur.word;
-            
-            char c = word.charAt(idx);
-            if(c=='.'){
-                for(TrieNode node:cur.children){
-                    if(node==null) continue;
-                    if (dfs(word, idx+1, node))
-                        return true;
-                }
-            }else{
-                return cur.children[c-'a']!=null && dfs(word,idx+1, cur.children[c-'a']);
-            }
-            return false;
-        }
-
-    }
+    
     // Adds a word into the data structure.
-    Trie trie = new Trie();
-
+    // Add the root for the trie
+    TrieNode root = new TrieNode();
     public void addWord(String word) {
-        trie.insert(word);
+        // Write your code here
+        TrieNode cur = root;
+        char[] ch = word.toCharArray();
+        for(char c:ch){
+            if(cur.children[c-'a']==null)
+                cur.children[c-'a'] = new TrieNode();
+            cur = cur.children[c-'a'];
+        }
+        cur.word = true;
     }
 
     // Returns if the word is in the data structure. A word could
     // contain the dot character '.' to represent any one letter.
     public boolean search(String word) {
-        return trie.dfs(word,0, trie.root);
+        // Write your code here
+        return dfs(word, 0, root);
     }
     
+    public boolean dfs(String word, int idx, TrieNode cur){
+        if(idx == word.length())
+            return cur.word;
+        char ch = word.charAt(idx);
+        if(ch == '.'){  //if charator is .
+            for(TrieNode child:cur.children){
+                if(child!=null && dfs(word, idx+1, child))
+                    return true;
+            }
+            return false;
+        }else if(cur.children[ch-'a']!=null)
+            return dfs(word, idx+1, cur.children[ch-'a']);
+        else 
+            return false;
+    }
+    
+    class TrieNode{
+        TrieNode[] children;
+        boolean word;
+        public TrieNode(){
+            children = new TrieNode[26];
+            for(int i=0;i<26;i++)
+                children[i] = null;
+            word = false;
+        }
+    }
 }
 
 // Your WordDictionary object will be instantiated and called as such:
