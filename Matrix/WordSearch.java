@@ -22,15 +22,12 @@ public class Solution {
         if(idx == word.length())
             return true;
         
-        if(r<0||r>=board.length||c<0||c>=board[0].length)
+        if(r<0||r>=board.length||c<0||c>=board[0].length || board[r][c]!=word.charAt(idx))
             return false;
         
         char tmp = board[r][c];
-        if(board[r][c] == word.charAt(idx))
-            board[r][c] = '*';
-        else
-            return false;
-            
+        board[r][c] = '*';
+     
         for(int[] d:dir){
             if(dfs(board, word, idx+1, r + d[0], c + d[1]))
                 return true;
