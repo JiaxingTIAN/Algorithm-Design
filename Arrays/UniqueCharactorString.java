@@ -8,7 +8,7 @@ public class Solution{
     for(int i=0;i<str.length();i++){
       int idx = str.charAt(i);
       if(visited[idx])
-        return false;
+        return false; //return false if the character exisited before
       visited[idx] = true;
     }
     return true;
