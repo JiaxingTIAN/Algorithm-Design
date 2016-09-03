@@ -21,11 +21,11 @@ public class Solution{
 	
 	public boolean palindromPermutation1(String str){
 		//Count the number of odd appearance along the way
-		if(str == null || str.length == 0) return false;
+		if(str == null || str.length() == 0) return false;
 		
-		int countOdd = 0;
+		int oddCount = 0;
 		int[] letter = new int[26];
-		int[] ch = str.toCharArray();
+		char[] ch = str.toCharArray();
 		for(char c:ch){
 			if(c==' ') continue;
 			letter[c - 'a']++;
