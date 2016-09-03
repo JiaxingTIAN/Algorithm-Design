@@ -34,4 +34,19 @@ public class Solution{
 		}
 		return oddCount<=1;
 	}
+	
+	public boolean palindromPermutation2(String str){
+		//Flip the coin to record the odd count 
+		if(str == null || str.length() == 0) return false;
+		
+		int count = 0;
+		char[] c = str.toCharArray();
+		for(char ch:c){
+			if(ch == ' ') continue;
+			int mask = 1<<(ch-'a');
+			if((count & mask) == 0)	count |= mask;
+			else 	count &= ~mask;
+		}
+		return (count & (count - 1)) == 0;
+	}
 }
