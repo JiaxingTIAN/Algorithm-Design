@@ -11,3 +11,4 @@ cat a.txt > b.txt # cat output the file content; > redirect the content to b.txt
 echo "Hello" > hello.txt # echo response "Hello" string to hello.txt
 touch a.txt # create a.txt 
 mkdir user # make dir
+cat a.txt >> b.txt # append a to the end of b.txt
