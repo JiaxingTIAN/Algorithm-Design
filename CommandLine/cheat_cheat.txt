@@ -17,3 +17,26 @@ $ cat volcanoes.txt | wc | cat > islands.txt
 # wc is then "piped" to cat. Finally, the standard output of cat is redirected to islands.txt.
 
 cat a.txt | sort > b.txt # sort the content of a and overwrite to b.txt
+sort a.txt | uniq >> b.txt # return the unique content form sorted a.txt and append to b.txt;
+                        # uniq filter out adjacent duplicate lines in a file
+grep -i Mount mountains.txt     #globle regular expression print  searches files for lines that match a pattern and returns the results.
+                                #It is also case sensitive. Here, grep searches for "Mount" in mountains.txt.
+                                #use -i option to enable case insensitive
+                                
+$ grep -Rl Arctic /home/ccuser/workspace/geography
+#grep -R searches all files in a directory and outputs filenames and lines containing matched results. -R stands for "recursive". Here 
+grep -R searches the /home/ccuser/workspace/geography directory for the string "Arctic" and outputs filenames and lines with matched 
+results.
+grep -Rl searches all files in a directory and outputs only filenames with matched results. -R stands for "recursive" and l stands for 
+"files with matches". Here grep -Rl searches the /home/ccuser/workspace/geography directory for the string "Arctic" and outputs 
+filenames with matched results.
+
+$ sed 's/snow/rain/g' forests.txt
+sed stands for "stream editor". It accepts standard input and modifies it based on an expression, before displaying it as output data. 
+It is similar to "find and replace".
+Let's look at the expression 's/snow/rain/':
+s: stands for "substitution". it is always used when using sed for substitution.
+snow: the search string, the text to find.
+rain: the replacement string, the text to add in place.
+In this case, sed searches forests.txt for the word "snow" and replaces it with "rain." Importantly, the above command will only 
+replace the first instance of "SNOW" ON A LINE. g stands for globle it will replace all the instance with snow with rain.
