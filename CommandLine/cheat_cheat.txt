@@ -12,3 +12,6 @@ echo "Hello" > hello.txt # echo response "Hello" string to hello.txt
 touch a.txt # create a.txt 
 mkdir user # make dir
 cat a.txt >> b.txt # append a to the end of b.txt
+$ cat volcanoes.txt | wc | cat > islands.txt
+#Multiple |s can be chained together. Here the standard output of cat volcanoes.txt is "piped" to the wc command. The standard output of
+# wc is then "piped" to cat. Finally, the standard output of cat is redirected to islands.txt.
