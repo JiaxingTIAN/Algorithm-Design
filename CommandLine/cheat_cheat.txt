@@ -1,0 +1,13 @@
+ls -alt # -a list all the file include hidden file starts with '.'
+        # -l list file in long format; 
+        #-t list file sort according to last time modified
+cd ../home/jiaxing
+pwd #print working directory
+cp jason.txt file.txt document/
+rm -r document  # recusively remove document dir and all its file and dir
+mr a.txt b.txt  #rename
+mr a.txt b.txt document/  # Move multiple files to dir
+cat a.txt > b.txt # cat output the file content; > redirect the content to b.txt
+echo "Hello" > hello.txt # echo response "Hello" string to hello.txt
+touch a.txt # create a.txt 
+mkdir user # make dir
