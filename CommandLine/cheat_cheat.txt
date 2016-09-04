@@ -40,3 +40,13 @@ snow: the search string, the text to find.
 rain: the replacement string, the text to add in place.
 In this case, sed searches forests.txt for the word "snow" and replaces it with "rain." Importantly, the above command will only 
 replace the first instance of "SNOW" ON A LINE. g stands for globle it will replace all the instance with snow with rain.
+> redirects standard output of a command to a file, overwriting previous content.
+>> redirects standard output of a command to a file, appending new content to old content.
+< redirects standard input to a command.
+| redirects standard output of a command to another command.
+A number of other commands are powerful when combined with redirection commands:
+
+sort: sorts lines of text alphabetically.
+uniq: filters duplicate, adjacent lines of text.
+grep: searches for a text pattern and outputs it.
+sed : searches for a text pattern, modifies it, and outputs it.
