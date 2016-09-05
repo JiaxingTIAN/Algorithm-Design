@@ -27,6 +27,22 @@ $ grep -Rl Arctic /home/ccuser/workspace/geography
 #grep -R searches all files in a directory and outputs filenames and lines containing matched results. -R stands for "recursive". Here 
 grep -R searches the /home/ccuser/workspace/geography directory for the string "Arctic" and outputs filenames and lines with matched 
 results.
+
+We'll begin by learning to use a simple, command line text editor called nano.
+
+In the terminal, type
+nano hello.txt
+This will open the nano text editor.
+2. In nano, at the top of the window, type
+
+"Hello, I am nano."
+Using the menu at the bottom of the terminal for reference, type Ctrl + O (the letter, not the number) to save the file. This is the letter "O", not the number zero.
+
+Press Enter, when prompted about the filename to write.
+
+Then type Ctrl + X to exit nano.
+
+Finally, type clear to clear the terminal window. The command prompt should now be at the top of the window.
 grep -Rl searches all files in a directory and outputs only filenames with matched results. -R stands for "recursive" and l stands for 
 "files with matches". Here grep -Rl searches the /home/ccuser/workspace/geography directory for the string "Arctic" and outputs 
 filenames with matched results.
