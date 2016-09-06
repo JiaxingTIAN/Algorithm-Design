@@ -1,12 +1,10 @@
 public class Solution {
-    /**
-     * @param A: Given an integer array
-     * @return: void
-     */
+    //Time complexity O(n)
     public void heapify(int[] A) {
         // write your code here
         for(int i=A.length/2;i>=0;i--){
             //Start from A.length/2, which is the 2nd last row - bottom up
+            //Ensure the top is smallest
             siftdown(A, i);
         }
     }
