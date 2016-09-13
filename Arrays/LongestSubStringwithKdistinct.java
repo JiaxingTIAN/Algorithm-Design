@@ -6,23 +6,28 @@ public class Solution {
      */
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
         // write your code here
-        if(s == null || s.length() == 0 || k==0)
+        if(s == null || s.length() == 0 || k == 0)
             return 0;
-        
-        HashMap<Character, Integer> map = new HashMap<>();
+        char[] c = s.toCharArray();
         int max = 0;
-        for(int i=0, j=0 ; i<s.length(); i++){
-            while(j < s.length() && map.size()<=k){
-                if(!map.containsKey(s.charAt(j))) map.put(s.charAt(j), 0);
-                if(map.size() > k) break;
-                map.put(s.charAt(j), map.get(s.charAt(j)) + 1);
+        Map<Character, Integer> map = new HashMap<>();
+        
+        //Two pointer forms a Sliding window to maintain the most k distinct elements
+        for(int i=0, j=0; i<s.length(); i++){
+            while(j < s.length()){
+                if(!map.containsKey(c[j])) 
+                    map.put(c[j], 0);
+                //If larger than k elements - break
+                if(map.size() > k)
+                    break;
+                map.put(c[j], map.get(c[j]) + 1);
                 j++;
                 max = Math.max(max, j - i);
             }
-
-            map.put(s.charAt(i), map.get(s.charAt(i)) - 1);
-            if(map.get(s.charAt(i)) == 0)
-                map.remove(s.charAt(i));
+            //Remove the i elements from the window
+            map.put(c[i], map.get(c[i]) - 1);
+            if(map.get(c[i]) == 0)
+                map.remove(c[i]);
         }
         return max;
     }
