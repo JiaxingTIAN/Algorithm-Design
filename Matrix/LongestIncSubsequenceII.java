@@ -4,7 +4,7 @@ public class Solution {
      * @return  an integer
      */
     int[][] step = new int[][]{{1,0},{-1,0},{0,1},{0,-1}}; 
-    //LTE
+    // Memorize O(n*m) time complexity
     public int longestIncreasingContinuousSubsequenceII(int[][] A) {
         // Write your code here
         if(A == null || A.length == 0)
@@ -23,6 +23,9 @@ public class Solution {
     }
     
     public int search(int[][] nums, int x, int y){
+        if(dp[x][y]!=0)
+            return dp[x][y];
+            
         int ans = 1;
         for(int[] d:step){
             int dx = x + d[0];
@@ -34,6 +37,7 @@ public class Solution {
                 ans = Math.max(ans,search(nums, dx, dy)+1);
             }
         }
+        dp[x][y] = ans;
         return ans;
     }
 }
