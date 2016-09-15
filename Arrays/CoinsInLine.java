@@ -14,13 +14,17 @@ public class Solution {
     
     
     public boolean search(int n, boolean[] visit, boolean[] dp){
+        
         if(visit[n])
             return dp[n];
         if(n==0)
-            return false;
-        if(n==1 || n==2)
-            return true;
-        dp[n] = (!search(n-1, visit, dp)||!search(n-2, visit, dp));
+            dp[n] = false;
+        else if(n==1 || n==2)
+            dp[n] = true;
+        else 
+            //you are intelligent you choose the best move
+            dp[n] = (!search(n-1, visit, dp)||!search(n-2, visit, dp));
+        
         visit[n] = true;
         return dp[n];    
     }
