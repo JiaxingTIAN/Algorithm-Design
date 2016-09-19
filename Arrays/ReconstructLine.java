@@ -26,7 +26,7 @@ public class OrderTallPeople {
 	static class HeightComparator implements Comparator<Person> {
 		public int compare(Person p1, Person p2){
 			int ret  = p2.height - p1.height;
-			return (ret == 0)?p2.tallCount - p1.tallCount:ret;
+			return (ret == 0)?p1.tallCount - p2.tallCount:ret;
 		}
 	}
 
