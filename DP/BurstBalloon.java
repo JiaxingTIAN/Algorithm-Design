@@ -1,37 +1,36 @@
 public class Solution {
-    /**
-     * @param nums a list of integer
-     * @return an integer, maximum coins
-     */
+    
     public int maxCoins(int[] nums) {
-        // Write your code here
-        int n = nums.length;
-        int [][]dp = new int [n+2][n+2];
-        
-        int [] arr = new int [n+2];
-        for (int i = 1; i <= n; i++){
-        	arr[i] = nums[i-1];
+        if(nums==null || nums.length==0){
+            return 0;
         }
+        int n = nums.length;
+        //dp[i][j] - the maximum score for interval i, j
+        int[][]dp = new int[n+2][n+2];
+        int[] arr = new int[n+2];
+        //Add dummy 1 to the start and end
         arr[0] = 1;
         arr[n+1] = 1;
-        
-        return search(arr, dp, 1 , n);
+        for(int i=0; i<n; i++){
+            arr[i+1] = nums[i];
+        }
+        //return dp[1][n]
+        return search(dp, arr, 1, n);
     }
-    public int search(int []arr, int [][]dp, int left, int right) {
-        if(left > right)
-            return 0;
-        if(dp[left][right] != 0)
-        	return dp[left][right];
-    	
-    	int res = 0;
-        for (int k = left; k <= right; ++k) {
-        	int midValue =  arr[left - 1] * arr[k] * arr[right + 1];
-        	int leftValue = search(arr, dp, left, k - 1);
-        	int rightValue = search(arr, dp, k + 1, right);
-            res = Math.max(res, leftValue + midValue + rightValue);
+    //Memoization O(n^3)
+    public int search(int[][]dp, int[]nums, int i, int j){
+        //calculated before, return immediately
+        if(dp[i][j] > 0){
+            return dp[i][j];
+        }
+        //After burst balloon is removed, 
+        //burst kth balloon last all other balloon within i, j is gone 
+        for(int k=i; k<=j; k++){
+            //Burst the kth balloon at last
+            int mid = nums[i-1]*nums[k]*nums[j+1];
+            dp[i][j] = Math.max(search(dp, nums, i, k-1)+search(dp, nums, k+1, j)+mid, dp[i][j]);
         }
         
-        dp[left][right] = res;
-        return res;
+        return dp[i][j];
     }
 }
