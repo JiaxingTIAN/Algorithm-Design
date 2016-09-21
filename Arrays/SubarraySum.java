@@ -26,6 +26,10 @@ public class Solution {
 }
 
 //Optimization with Hashmap in O(n)
+//[5, 4, 1, 2, -3]
+//(0, -1), (5, 0), (9, 1), (10, 2), (12, 3), (9, 4)
+//since 9 appears in the map before, means 2 - 4 sum up to zero
+//return map.get(sum) + 1 and i
 public class Solution {
     /**
      * @param nums: A list of integers
@@ -34,26 +38,26 @@ public class Solution {
      */
     public ArrayList<Integer> subarraySum(int[] nums) {
         // write your code here
-        int len = nums.length;
-       
-        ArrayList<Integer> ans = new ArrayList<Integer>();
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-       
-        map.put(0, -1);
-       
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(nums == null||nums.length == 0){
+            return ans;
+        }
+        int n = nums.length;
+        //HashMap to store the sum and index pair
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1); //start with sum = 0
         int sum = 0;
-        for (int i = 0; i < len; i++) {
+        for(int i=0; i<n; i++){
             sum += nums[i];
-           
-            if (map.containsKey(sum)) {
-                ans.add(map.get(sum) + 1);
+            //If the sum has appear before
+            //means all the value in between sum up to zero
+            if(map.containsKey(sum)){
+                ans.add(map.get(sum)+1);
                 ans.add(i);
                 return ans;
             }
-            
             map.put(sum, i);
         }
-       
         return ans;
     }
 }
