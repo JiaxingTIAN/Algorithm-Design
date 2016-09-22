@@ -12,7 +12,12 @@ Input data: 1, 4, 1, 2, 7, 5, 2
   Index:     0  1  2  3  4  5  6  7  8  9
   Count:     0  2  4  4  5  6  6  7  7  7
   
-  output 
+  bucketSort(arr[], n)
+1) Create n empty buckets (Or lists).
+2) Do following for every array element arr[i].
+.......a) Insert arr[i] into bucket[n*array[i]]
+3) Sort individual buckets using insertion sort.
+4) Concatenate all sorted buckets.
 */
 public static void Countsort(char arr[])
     {
