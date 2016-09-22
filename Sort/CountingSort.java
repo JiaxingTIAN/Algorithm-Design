@@ -1,8 +1,19 @@
 // Bound of comparison sort: Merge sort, Quick sort, Heap Sort => O(nlogn)
 // Counting Sort (bucket sort) => O(n + u) # u is the range of the numbers 1 to u (When u = n^2 useless)
 // Radix sort => O(d*(n + b)) d: how many digits, n: arrary length, b: base
+/*
+Input data: 1, 4, 1, 2, 7, 5, 2
+  1) Take a count array to store the count of each unique object.
+  Index:     0  1  2  3  4  5  6  7  8  9
+  Count:     0  2  2  0   1  1  0  1  0  0
 
-
+  2) Modify the count array such that each element at each index 
+  stores the sum of previous counts. 
+  Index:     0  1  2  3  4  5  6  7  8  9
+  Count:     0  2  4  4  5  6  6  7  7  7
+  
+  output 
+*/
 public static void Countsort(char arr[])
     {
         int n = arr.length;
