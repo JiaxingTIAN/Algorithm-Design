@@ -53,3 +53,26 @@ public static void Countsort(char arr[])
         for (int i = 0; i<n; ++i)
             arr[i] = output[i];
     }
+//Counting for numbers range of 0-max
+public static void countSort(int[] nums){
+		
+		int max = Integer.MIN_VALUE;
+		for(int num:nums){
+			max = Math.max(num, max);
+		}
+		int[] tmp = new int[max+1]; //range from 0 to max => size: max + 1
+		for(int num:nums){
+			tmp[num]++;
+		}
+		for(int i=1; i<=max; i++){
+			tmp[i] += tmp[i-1];
+		}
+		int []output = new int[nums.length];
+		for(int i=0;i<nums.length;i++){
+			output[--tmp[nums[i]]]=nums[i];
+			//tmp[nums[i]]--;
+		}
+		for(int i=0; i<nums.length; i++){
+			nums[i] = output[i];
+		}
+	}
