@@ -34,9 +34,10 @@ class Radix {
  
         // Build the output array
         for (i = n - 1; i >= 0; i--)
-        {
-            output[count[ (arr[i]/exp)%10 ] - 1] = arr[i];
-            count[ (arr[i]/exp)%10 ]--;
+        { //Copy from the end to the start index, since it is sorted in the previous iteration
+          //start with the start will reverse the previous order (each time count--)
+            output[count[ --(arr[i]/exp)%10 ]] = arr[i];
+            //count[ (arr[i]/exp)%10 ]--;
         }
  
         // Copy the output array to arr[], so that arr[] now
