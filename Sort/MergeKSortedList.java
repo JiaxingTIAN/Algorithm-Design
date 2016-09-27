@@ -11,6 +11,14 @@ public class Solution {
         if(lists == null || lists.length == 0){
             return null;
         }
+        
+        Comparator<ListNode> cmp = new Comparator<ListNode>(){
+            @Override
+            public int compare(ListNode n1, ListNode n2){
+                return n1.val - n2.val;
+            }
+        };
+        
         int n = lists.length;
         Queue<ListNode> heap = new PriorityQueue<>(n, (a, b) -> { return a.val - b.val; });
         for(ListNode head:lists){
