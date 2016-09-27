@@ -12,6 +12,7 @@ public class Solution {
         //Initalize all the zero state
         for(int i=1; i<m; i++){
             if(p.charAt(i) == '*'){ //Assume the input string is valid
+                if(i <= 1) return false;    //Invalid input
                 dp[0][i+1] = dp[0][i-1];
             }
         }
