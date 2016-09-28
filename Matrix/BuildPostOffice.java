@@ -1,3 +1,11 @@
+/*
+Given a 2D grid, each cell is either an house 1 or empty 0 (the number zero, one), find the place to build a post office, 
+the distance that post office to all the house sum is smallest. Return the smallest distance. Return -1 if it is not possible.
+0 1 0 0
+1 0 1 1
+0 1 0 0
+you can walk through house and empty, you can only build at empty.
+*/
 public class Solution {
     /**
      * @param grid a 2D grid
