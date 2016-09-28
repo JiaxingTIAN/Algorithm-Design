@@ -6,6 +6,7 @@
  *     RandomListNode(int x) { this.label = x; }
  * };
  */
+//Use of HashMap O(n) time and space
 public class Solution {
     public RandomListNode copyRandomList(RandomListNode head) {
         if(head == null){
@@ -81,5 +82,49 @@ public class Solution {
         }
         
         return map.get(head);
+    }
+}
+//Optimize with O(n) time and O(1) space
+/**
+ * Definition for singly-linked list with a random pointer.
+ * class RandomListNode {
+ *     int label;
+ *     RandomListNode next, random;
+ *     RandomListNode(int x) { this.label = x; }
+ * };
+ */
+public class Solution {
+    public RandomListNode copyRandomList(RandomListNode head) {
+        if(head == null){
+            return null;
+        }
+        //Insert copy behind the original node
+        RandomListNode cur = head;
+        while(cur != null){
+            RandomListNode cp = new RandomListNode(cur.label);
+            RandomListNode tmp = cur.next;
+            cur.next = cp;
+            cp.next = tmp;
+            cur = tmp;
+        }
+        //Assign new random pointer to the next of random
+        cur = head;
+        while(cur != null){
+            if(cur.random != null){
+                cur.next.random = cur.random.next;
+            }
+            cur = cur.next.next;
+        }
+        //Split the original list and new copy
+        cur = head;
+        RandomListNode dummy = new RandomListNode(0);
+        RandomListNode node = dummy;
+        while(cur != null){
+            node.next = cur.next;
+            node = node.next;
+            cur.next = cur.next.next;
+            cur = node.next;
+        }
+        return dummy.next;
     }
 }
