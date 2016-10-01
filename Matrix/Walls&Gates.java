@@ -86,7 +86,7 @@ public class Solution {
         }
     }
 }
-//DFS version
+//DFS version - Time Complexity O(KMN) should not be used for shortest distance
 int[][] dirs = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
 public void wallsAndGates(int[][] rooms) {
