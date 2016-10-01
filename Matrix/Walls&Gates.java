@@ -87,24 +87,35 @@ public class Solution {
     }
 }
 //DFS version - Time Complexity O(KMN) should not be used for shortest distance
-int[][] dirs = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-
-public void wallsAndGates(int[][] rooms) {
-    for(int i = 0; i < rooms.length; i++) {
-        for(int j = 0; j < rooms[0].length; j++) {
-            if(rooms[i][j] == 0) {
-                dfs(rooms, i, j);
-            }              
+public class Solution {
+    public void wallsAndGates(int[][] rooms) {
+        if(rooms == null || rooms.length == 0 || rooms[0].length == 0){
+            return;
+        }
+        int n = rooms.length;
+        int m = rooms[0].length;
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(rooms[i][j] == 0){
+                    dfs(rooms, i, j);
+                }
+            }
         }
     }
-}
-
-public void dfs(int[][] rooms, int i, int j) {
-    for(int[] dir : dirs) {
-        int x = i + dir[0], y = j + dir[1];
-        if(x < 0 || x >= rooms.length || y < 0 || y >= rooms[0].length || rooms[x][y] <= rooms[i][j]) continue;
-        rooms[x][y] = rooms[i][j] + 1;
-        dfs(rooms, x, y);
+    
+    int[][] dir = new int[][]{{1,0}, {-1,0}, {0,1}, {0,-1}};
+    
+    public void dfs(int[][]rooms, int x, int y){
+        int n = rooms.length;
+        int m = rooms[0].length;
+        for(int[] d:dir){
+            int x1 = x + d[0];
+            int y1 = y + d[1];
+            if(x1<n && x1>=0 && y1<m && y1>=0 && rooms[x1][y1]>rooms[x][y]){
+                rooms[x1][y1] = rooms[x][y] + 1;
+                dfs(rooms, x1, y1);
+            }
+        }
     }
 }
 
