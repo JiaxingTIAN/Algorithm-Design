@@ -1,3 +1,19 @@
+/*
+You want to build a house on an empty land which reaches all buildings in the shortest amount of distance. You can only move up, down, left and right. You are given a 2D grid of values 0, 1 or 2, where:
+
+Each 0 marks an empty land which you can pass by freely.
+Each 1 marks a building which you cannot pass through.
+Each 2 marks an obstacle which you cannot pass through.
+
+
+Start from each building to do a BFS. Store the smallest distance to all buildings of each grid in a 2D array and update the array for every BFS.Search through the array to find point of smallest distance.
+Need another 2D array to record the number of reachable buildings. Exclude the points if number of reachable building is smaller than total number of building.
+Use a queue for BFS, and keep a visit list for each building
+
+TIme Complextity: O(kMN) - BFS for k buildings = K * MN (MN is time for BFS accross the board)
+Space Complexity: O(MN) for queue, visit array, distance array, and numBuilding array
+*/
+
 public class Solution {
     //For search through the neighbors 
     int[][] dir = new int[][]{{1,0},{-1,0},{0,1},{0,-1}};
