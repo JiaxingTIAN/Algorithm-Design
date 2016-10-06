@@ -36,6 +36,7 @@ public class Solution {
         return res;
     }
 }
+//Level order traversal II bottom up
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -45,6 +46,8 @@ public class Solution {
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+//O(N) time complexity
 public class Solution {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> res = new LinkedList<>();
@@ -67,6 +70,50 @@ public class Solution {
                 }
             }
             res.add(0, list);
+        }
+        return res;
+    }
+}
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+//Zig Zag traversal => O(N) time
+public class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new LinkedList<>();
+        if(root == null){
+            return res;
+        }
+        boolean reverse = false;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            List<Integer> list = new LinkedList<>();
+            int size = queue.size();
+            for(int i=0; i<size; i++){
+                TreeNode cur = queue.poll();
+                if(reverse){
+                    list.add(0, cur.val);
+                }else{
+                    list.add(cur.val);
+                }
+                if(cur.left != null){
+                    queue.offer(cur.left);
+                }
+                if(cur.right != null){
+                    queue.offer(cur.right);
+                }
+            }
+            res.add(list);
+            reverse = !reverse;
         }
         return res;
     }
