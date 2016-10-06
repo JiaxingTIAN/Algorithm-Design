@@ -64,7 +64,7 @@ public class Solution {
         
         Queue<Node> queue = new LinkedList<>();
         queue.offer(new Node(root, 0));
-        BFS 
+        //BFS 
         Map<Integer, List<Integer>> map = new HashMap<>();
         while(!queue.isEmpty()){
             Node cur = queue.poll();
