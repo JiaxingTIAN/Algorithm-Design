@@ -118,3 +118,68 @@ public class Solution {
         return res;
     }
 }
+
+
+
+//DFS 
+public class Solution{
+    public List<List<Integer>> levelOrder(TreeNode root){
+        List<List<Integer>> res = new ArrayList<>();
+        dfs(root, res, 0);
+        return res;
+    }
+    public void dfs(TreeNode node, List<List<Integer>> res, int level){
+        if(node == null)
+            return;
+        if(level >= res.size()){
+            List<Integer> newList = new LinkedList<>();
+            res.add(newList);
+        }
+        List<Integer> list = res.get(level);
+        list.add(node.val);
+        dfs(node.left, res, level+1);
+        dfs(node.right, res, level+1);
+}
+//DFS - bottom up
+public class Solution{
+    public List<List<Integer>> levelOrder(TreeNode root){
+        List<List<Integer>> res = new ArrayList<>();
+        dfs(root, res, 0);
+        return res;
+    }
+    //Better to specify the List to be List<List<Integer>> for later use convience
+    public void dfs(TreeNode node, List<List<Integer>> res, int level){
+        if(node == null)
+            return;
+        if(level >= res.size()){
+            res.add(0, new LinkedList<>());
+        }
+        res.get(res.size() - level - 1).add(node.val);
+        dfs(node.left, res, level+1);
+        dfs(node.right, res, level+1);
+    }
+}
+
+//DFS - ZigZag
+public class Solution{
+    public List<List<Integer>> zigzagTraversal(TreeNode root){
+        List<List<Integer>> res = new ArrayList<>();    //ArrayList for fast retrival by index
+        dfs(res, root, 0);
+        return res;
+    }
+    public void dfs(List<List<Integer>> res, TreeNode node, int level){
+        if(node == null){
+            return;
+        }
+        if(level >= res.size()){
+            res.add(new LinkedList<>());    //LinkedList for fast insertion for head
+        }
+        if(level % 2 == 0)
+            res.get(level).add(node.val);
+        else
+            res.get(level).add(0, node.val);
+        dfs(res, node.left, level+1);
+        dfs(res, node.right, level+1);
+    }
+}
+                           
