@@ -28,7 +28,7 @@ public class Solution{
       if(node.node.right!=null)
         queue.offer(new Node(node.node.right, col+1);
     }
-    for(List list:map.entrySet()) 
+    for(List list:map.values()) 
       ans.add(list);
     return ans;
   }
