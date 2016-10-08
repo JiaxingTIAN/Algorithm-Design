@@ -17,13 +17,14 @@
  */
 public class NestedIterator implements Iterator<Integer> {
     Stack<NestedInteger> stack;
+    //O(N)
     public NestedIterator(List<NestedInteger> nestedList) {
         stack = new Stack<>();
         for(int i=nestedList.size()-1; i>=0; i--){
-            stack.push(nestedList.get(i));
+            stack.push(nestedList.get(i));  //Push the list from end in order to start from beginning
         }
     }
-
+    //Average O(1) time <= O(N)/N
     @Override
     public Integer next() {
         if(hasNext()){
@@ -31,20 +32,22 @@ public class NestedIterator implements Iterator<Integer> {
         }
         return null;
     }
-
+    //Worst case O(N) => average O(n)/n = O(1) time
     @Override
-    public boolean hasNext() {
+    public boolean hasNext() {  
+        //Check for next integer and flatten the list among the way
         while(!stack.isEmpty()){
-            NestedInteger cur = stack.peek();
-            if(cur.isInteger()){
+            NestedInteger cur = stack.peek();   //peek element in the top
+            if(cur.isInteger()){    //Return true for integer
                 return true;
             }
-            stack.pop();
+            //Flatten if list => POP the list out of stack and add everything back to the stack from end
+            stack.pop();    
             for(int i=cur.getList().size()-1; i>=0; i--){
                 stack.push(cur.getList().get(i));
             }
         }
-        return false;
+        return false;   //Return false when stack is empty
     }
 }
 
