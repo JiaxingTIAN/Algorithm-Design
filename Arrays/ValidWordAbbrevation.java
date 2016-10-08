@@ -12,8 +12,8 @@ public class Solution {
                 j++;
                 continue;
             }
-            //Case 2: Not same character and abbr is not digit, return false
-            if(abbr.charAt(j) < '0' || abbr.charAt(j) > '9'){
+            //Case 2: Not same character and abbr is not digit or start with 0, return false
+            if(abbr.charAt(j) <= '0' || abbr.charAt(j) > '9'){
                 return false;
             }
             //Case 3: abbr contains digits convert to count
