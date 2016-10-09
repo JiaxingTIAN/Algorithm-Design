@@ -1,35 +1,27 @@
 public class Solution {
     public String addStrings(String num1, String num2) {
-        //String a is the longer one
-        String a = num1, b = num2;
-        if(a.length() < b.length()){
-            String tmp = a;
-            a = b;
-            b = tmp;
+        StringBuilder res = new StringBuilder();
+        int index1 = num1.length() - 1;
+        int index2 = num2.length() - 1;
+        int carry = 0;
+        int sum = 0;
+        while (index1 >= 0 || index2 >= 0) {
+            sum = carry;
+            if (index1 >= 0) {
+                sum += num1.charAt(index1) - '0';
+                index1--;
+            }
+            if (index2 >= 0) {
+                sum += num2.charAt(index2) - '0';
+                index2--;
+            }
+            carry = sum / 10;
+            sum = sum % 10;
+            res.append(sum);
         }
-        
-        int pa = a.length()-1;
-        int pb = b.length()-1;
-        int carries = 0;
-        String rst = "";
-        
-        while(pb >= 0){
-            int sum = (a.charAt(pa) - '0') + (b.charAt(pb) - '0') + carries;
-            rst = (sum % 10) + rst;
-            carries = sum / 10;
-            pa --;
-            pb --;
+        if (carry != 0) {
+            res.append(carry);
         }
-        
-        while(pa >= 0){
-            int sum = (a.charAt(pa) - '0') + carries;
-            rst = (sum % 10) + rst;
-            carries = sum / 10;
-            pa --;
-        }       
-        
-        if (carries == 1)
-            rst = "1" + rst;
-        return rst;
+        return res.reverse().toString();
     }
 }
