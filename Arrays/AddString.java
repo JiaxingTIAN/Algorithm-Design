@@ -1,27 +1,26 @@
 public class Solution {
     public String addStrings(String num1, String num2) {
-        StringBuilder res = new StringBuilder();
-        int index1 = num1.length() - 1;
-        int index2 = num2.length() - 1;
+        StringBuilder str = new StringBuilder();
+        int idx1 = num1.length() - 1;
+        int idx2 = num2.length() - 1;
         int carry = 0;
         int sum = 0;
-        while (index1 >= 0 || index2 >= 0) {
-            sum = carry;
-            if (index1 >= 0) {
-                sum += num1.charAt(index1) - '0';
-                index1--;
+        while(idx1 >= 0 || idx2 >= 0){  //Any of the string still have digits
+            sum = carry;    //add the carry from previous sum
+            if(idx1 >= 0){
+                sum += num1.charAt(idx1--) - '0';
             }
-            if (index2 >= 0) {
-                sum += num2.charAt(index2) - '0';
-                index2--;
+            if(idx2 >= 0){
+                sum += num2.charAt(idx2--) - '0';
             }
             carry = sum / 10;
             sum = sum % 10;
-            res.append(sum);
+            str.append(sum);
         }
-        if (carry != 0) {
-            res.append(carry);
+        //Final check if there still has remaining carry
+        if(carry > 0){
+            str.append(carry);
         }
-        return res.reverse().toString();
+        return str.reverse().toString();
     }
 }
