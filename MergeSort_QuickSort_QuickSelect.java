@@ -1,3 +1,4 @@
+//QuickSort - O(nlogn)
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
         if(nums == null || nums.length == 0){
@@ -34,6 +35,7 @@ public class Solution {
     }
 }
 
+//MergeSort
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
         if(nums == null || nums.length == 0){
@@ -77,5 +79,38 @@ public class Solution {
         int tmp = nums[i];
         nums[i] = nums[j];
         nums[j] = tmp;
+    }
+}
+
+//QuickSelect => O(2N-1) / O(N) 
+public class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        if(nums == null || nums.length == 0 || k>nums.length || k<=0){
+            return -1;  //Invalid input
+        }
+        return quickSelect(nums, 0, nums.length-1, k);
+    }
+    
+    public int quickSelect(int[]nums, int lo, int hi, int k){
+        
+        int l = lo, r = hi, pivot = nums[hi];
+        while(l < r){   //concise partition
+            if(nums[l++] > pivot)
+                swap(nums, --l, --r);
+        }
+        swap(nums, l, hi);
+        int rank = nums.length - l;
+        if(rank == k){
+            return nums[l];
+        }else if(rank > k){
+            return quickSelect(nums, l+1, hi, k);
+        }else{
+            return quickSelect(nums, lo, l-1, k);
+        }
+    }
+    void swap(int[] A, int i, int j) {
+    	int tmp = A[i];
+    	A[i] = A[j];
+    	A[j] = tmp;				
     }
 }
