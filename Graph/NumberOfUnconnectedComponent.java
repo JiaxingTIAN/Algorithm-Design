@@ -70,3 +70,52 @@ public class Solution {
         }
     }
 }
+public class Solution {
+    int[] root;
+    public int countComponents(int n, int[][] edges) {
+        //Union Find 
+        if(edges == null||edges.length == 0||edges[0].length == 0){
+            return n;
+        }
+        root = new int[n];
+        for(int i=0; i<n; i++){
+            root[i] = i;
+        }
+        int count = n;
+        for(int[]edge:edges){
+            int f1 = compressFind(edge[0]);
+            int f2 = compressFind(edge[1]);
+            if(f1 != f2){
+                count--;
+                root[f1] = f2;
+            }
+        }
+        return count;
+    }
+    //Compress Find
+    public int find(int cur){
+        if(root[cur] != cur){
+            root[cur] = find(root[cur]);
+        }
+        return root[cur];
+    }
+    public int compressFind(int cur){
+        int fa = cur;
+        while(fa!=root[fa]){
+            fa = root[fa];
+        }
+        while(root[cur] != fa){
+            int tmp = root[cur];
+            root[cur] = fa;
+            cur = tmp;
+        }
+        return fa;
+    }
+    public void union(int a, int b){
+        int fa = compressFind(a);
+        int fb = compressFind(b);
+        if(fa != fb){
+            root[fa] = fb;
+        }
+    }
+}
