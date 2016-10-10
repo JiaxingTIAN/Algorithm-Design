@@ -1,23 +1,22 @@
 //O(nlogn) time complexity O(n) space complexity
-public class Solution{
-    public void wiggleSort(int[] nums){
-        if(nums==null || nums.length<2) return;
+public class Solution {
+    public void wiggleSort(int[] nums) {
+        if(nums == null || nums.length == 0){
+            return;
+        }
         Arrays.sort(nums);
-        int n = nums.length;
-        int[] temp = new int[n];
-        int left = (n-1)/2;
-        int right = n-1;
-        for(int i=0;i<n;i++){
-            if((i&1)==0){
-                temp[i] = nums[left];
-                left--;
-            }
-            else{
-                temp[i] = nums[right];
-                right--;
+        int l = (nums.length - 1)/2;
+        int r = nums.length - 1;
+        int[] tmp = new int[nums.length];
+        for(int i=0; i<nums.length; i++){
+            if((i&1) == 0){
+                tmp[i] = nums[l--];
+            }else{
+                tmp[i] = nums[r--];
             }
         }
-        System.arraycopy(temp,0,nums,0,n);
+        //System.arraycopy(source, s_begin, target, t_begin, length)
+        System.arraycopy(tmp, 0, nums, 0, nums.length);
     }
 }
 //Linear Time Space
