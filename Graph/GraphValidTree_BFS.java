@@ -1,36 +1,35 @@
 public class Solution {
-    /**
-     * @param n an integer
-     * @param edges a list of undirected edges
-     * @return true if it's a valid tree, or false
-     */
     public boolean validTree(int n, int[][] edges) {
-        // Write your code here
-        Map<Integer, List<Integer>> adj = new HashMap<>();
-        for(int i=0;i<n;i++){
-            adj.put(i, new LinkedList<Integer>());
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        if(edges == null || n-1 != edges.length)
+            return false;
+        for(int i=0; i<n; i++){
+            map.put(i, new HashSet<>());
         }
-        for(int[]edge:edges){
-            adj.get(edge[0]).add(edge[1]);
-            adj.get(edge[1]).add(edge[0]);
+        for(int[] edge:edges){
+            //Undirected Graph add to both adjecent list
+            map.get(edge[0]).add(edge[1]);
+            map.get(edge[1]).add(edge[0]);
         }
-        boolean[] visited = new boolean[n];
-        Queue<Integer> queue = new LinkedList<Integer>();
+        boolean[]visit = new boolean[n];
+        Queue<Integer> queue = new LinkedList<>();
         queue.offer(0);
-        
+        visit[0] = true;
         while(!queue.isEmpty()){
             int cur = queue.poll();
-            if(visited[cur])
-                return false;
-            visited[cur] = true;
-            for(int nei:adj.get(cur)){
-                if(!visited[nei])
-                    queue.offer(nei);
+            for(int nei:map.get(cur)){
+                if(visit[nei]){
+                    return false;
+                }
+                map.get(nei).remove(cur);   //avoid detect parent node
+                queue.offer(nei);
+                visit[nei] = true;
             }
-            
         }
-        for(boolean v:visited)
-            if(!v) return false;
+        for(int i=0; i<n; i++){ //Final Check for unconnected component
+            if(!visit[i])
+                return false;
+        }
         return true;
     }
 }
