@@ -8,7 +8,7 @@ public class Solution{
         int left = (n-1)/2;
         int right = n-1;
         for(int i=0;i<n;i++){
-            if(i&1==0){
+            if((i&1)==0){
                 temp[i] = nums[left];
                 left--;
             }
