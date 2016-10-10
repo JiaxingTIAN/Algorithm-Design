@@ -11,12 +11,19 @@ If i is odd, then nums[i] >= nums[i - 1];
 If i is even, then nums[i] <= nums[i - 1];
 */
 //Coding
-class Solution {
-public: 
-    void wiggleSort(vector<int>& nums) {
-        int n = nums.size();
-        for (int i = 1; i < n; i++)
-            if (((i & 1) && nums[i] < nums[i - 1]) || (!(i & 1) && nums[i] > nums[i - 1]))
-                swap(nums[i], nums[i - 1]);
+public class Solution {
+    public void wiggleSort(int[] nums) {
+        if(nums == null || nums.length == 0){
+            return;
+        }
+        for(int i=1; i<nums.length; i++){
+            if(((i&1) == 1 && nums[i] < nums[i-1]) || ((i&1) == 0 && nums[i] > nums[i-1]))
+                swap(nums, i, i-1);
+        }
     }
-};
+    public void swap(int[]nums, int i, int j){
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+}
