@@ -7,6 +7,8 @@ Return the total number of ways you can paint the fence.
 */
 public class Solution {
     public int numWays(int n, int k) {
+        //O(1) space with rolling array
+        //O(N) time complexity
         int[][] dp = new int[2][2];
         dp[0][0] = 0;
         dp[0][1] = k;
