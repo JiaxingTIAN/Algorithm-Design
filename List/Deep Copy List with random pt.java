@@ -98,32 +98,30 @@ public class Solution {
         if(head == null){
             return null;
         }
-        //Insert copy behind the original node
+        //Assign a new copy to the next of each node
         RandomListNode cur = head;
         while(cur != null){
-            RandomListNode cp = new RandomListNode(cur.label);
             RandomListNode tmp = cur.next;
-            cur.next = cp;
-            cp.next = tmp;
+            cur.next = new RandomListNode(cur.label);
+            cur.next.next = tmp;
             cur = tmp;
         }
-        //Assign new random pointer to the next of random
+        //Assign random pointer of copy node
         cur = head;
         while(cur != null){
-            if(cur.random != null){
+            if(cur.random != null) 
                 cur.next.random = cur.random.next;
-            }
             cur = cur.next.next;
         }
-        //Split the original list and new copy
+        //Split the two list 
         cur = head;
         RandomListNode dummy = new RandomListNode(0);
         RandomListNode node = dummy;
         while(cur != null){
             node.next = cur.next;
             node = node.next;
-            cur.next = cur.next.next;
-            cur = node.next;
+            cur.next = node.next;
+            cur = cur.next;
         }
         return dummy.next;
     }
