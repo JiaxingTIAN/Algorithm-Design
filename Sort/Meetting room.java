@@ -1,3 +1,4 @@
+
 /**
  * Definition for an interval.
  * public class Interval {
@@ -6,8 +7,57 @@
  *     Interval() { start = 0; end = 0; }
  *     Interval(int s, int e) { start = s; end = e; }
  * }
+ 
+Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), determine if a person could attend all meetings.
+
+For example,
+Given [[0, 30],[5, 10],[15, 20]],
+return false.
+
+
  */
- //Sweep Line
+
+public class Solution {
+    public boolean canAttendMeetings(Interval[] intervals) {
+        if(intervals == null || intervals.length == 0){
+            return true;
+        }
+        Comparator<Interval> cmp = new Comparator<Interval>(){
+            public int compare(Interval v1, Interval v2){
+                return v1.start - v2.start;
+            }
+        };
+        //Sort intervals according to start time
+        Arrays.sort(intervals, cmp);    //Time complexity O(NlogN)
+        //Return false if time conflict
+        for(int i=0; i<intervals.length-1; i++){
+            if(intervals[i].end > intervals[i+1].start){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+}
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ 
+Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.
+
+For example,
+Given [[0, 30],[5, 10],[15, 20]],
+return 2. 
+ */
+
+//Sweep Line
+
+
 public class Solution {
     class Point implements Comparable<Point>{
         int time;
