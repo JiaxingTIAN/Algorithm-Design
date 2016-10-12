@@ -17,19 +17,21 @@ public class Solution {
         }
         //recursively call for left subtree
         if(root.left != null){
-            Node left = toList(root.left);
+            Node left = toList(root.left);  //return root of left subtree
             while(left.right != null){
-                left = left.right;
+                left = left.right;  //find the most right node
             }
+            //Connect the most right to root left
             left.right = root;
             root.left = left;
         }
         //right subtree
         if(root.right != null){
-            Node right = toList(root.right);
+            Node right = toList(root.right);    //root of right subtree
             while (right.left != null){
-                right = right.left;
+                right = right.left; //find most left node
             }
+            //connect most left to the root right
             right.left = root;
             root.right = right;
         }
@@ -38,6 +40,7 @@ public class Solution {
     }
     public static Node convertBT(Node root){
         Node node = toList(root);
+        //find the beginning of the list 
         while (node.left != null){
             node = node.left;
         }
