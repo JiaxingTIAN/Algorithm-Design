@@ -119,3 +119,74 @@ public class Solution {
     	sb.setLength(len);
     }
 }
+
+//Iterate two times 
+//From left to right to remove ), if count left < 0 iterate through last remove index to current and try every possible solution
+//From right to left to remove (
+public List<String> removeInvalidParentheses(String s) {
+    List<String> ans = new ArrayList<>();
+    remove(s, ans, 0, 0, new char[]{'(', ')'});
+    return ans;
+}
+
+public void remove(String s, List<String> ans, int last_i, int last_j,  char[] par) {
+    for (int stack = 0, i = last_i; i < s.length(); ++i) {
+        if (s.charAt(i) == par[0]) stack++;
+        if (s.charAt(i) == par[1]) stack--;
+        if (stack >= 0) continue;
+        for (int j = last_j; j <= i; ++j)
+            if (s.charAt(j) == par[1] && (j == last_j || s.charAt(j - 1) != par[1]))
+                remove(s.substring(0, j) + s.substring(j + 1, s.length()), ans, i, j, par);
+        return;
+    }
+    String reversed = new StringBuilder(s).reverse().toString();
+    if (par[0] == '(') // finished left to right
+        remove(reversed, ans, 0, 0, new char[]{')', '('});
+    else // finished right to left
+        ans.add(reversed);
+}
+
+//For one valid solution
+public static String removeParenthese(String s){
+        if(s == null || s.length() == 0){
+            return s;
+        }
+        int left = 0, right = 0;
+        StringBuilder sb = new StringBuilder();
+        //from left to right to remove )
+        for(char c:s.toCharArray()){
+            if (c == '('){
+                left++;
+                sb.append(c);
+            }else if(c == ')'){ //skip ) when left == 0
+                if(left > 0){
+                    left--;
+                    sb.append(c);
+                }
+            }else {
+                sb.append(c);
+            }
+        }
+        //From right to left to remove (
+        if(left > 0){
+            s = sb.toString();
+            sb = new StringBuilder();
+            for(int i=s.length()-1; i>=0; i--){
+                char c = s.charAt(i);
+                if(c == ')') {
+                    right++;
+                    sb.append(c);
+                }else if(c == '('){
+                    if(right > 0){
+                        right--;
+                        sb.append(c);
+                    }
+                }else {
+                    sb.append(c);
+                }
+            }
+            return sb.reverse().toString();
+        }
+
+        return sb.toString();
+    }
