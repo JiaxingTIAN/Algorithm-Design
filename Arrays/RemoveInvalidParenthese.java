@@ -105,17 +105,17 @@ public class Solution {
         int len = sb.length();
        
     	if(c == '(') {
-    		DFS(res, s, i + 1, rmL - 1, rmR, open, sb);
-    		DFS(res, s, i + 1, rmL, rmR, open + 1, sb.append(c)); 
+    		DFS(res, s, i + 1, rmL - 1, rmR, open, sb); //Remove firset
+    		DFS(res, s, i + 1, rmL, rmR, open + 1, sb.append(c));   //Keep
     		
     	} else if(c == ')') {
     		DFS(res, s, i + 1, rmL, rmR - 1, open, sb);
     		DFS(res, s, i + 1, rmL, rmR, open - 1, sb.append(c));
     		
-    	} else {
+    	} else {    //Normal character append 
     		DFS(res, s, i + 1, rmL, rmR, open, sb.append(c)); 
     	}
-    	
+    	//Rest for futher backtrack
     	sb.setLength(len);
     }
 }
