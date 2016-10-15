@@ -147,7 +147,7 @@ public void remove(String s, List<String> ans, int last_i, int last_j,  char[] p
 }
 
 //For one valid solution
-public static String removeParenthese(String s){
+   public static String removeParenthese(String s){
         if(s == null || s.length() == 0){
             return s;
         }
@@ -168,25 +168,24 @@ public static String removeParenthese(String s){
             }
         }
         //From right to left to remove (
-        if(left > 0){
-            s = sb.toString();
-            sb = new StringBuilder();
-            for(int i=s.length()-1; i>=0; i--){
-                char c = s.charAt(i);
-                if(c == ')') {
-                    right++;
-                    sb.append(c);
-                }else if(c == '('){
-                    if(right > 0){
-                        right--;
-                        sb.append(c);
-                    }
-                }else {
+        if(left == 0) {
+            return sb.toString();
+        }
+        s = sb.toString();
+        sb = new StringBuilder();
+        for(int i=s.length()-1; i>=0; i--){
+            char c = s.charAt(i);
+            if(c == ')') {
+                right++;
+                sb.append(c);
+            }else if(c == '('){
+                if(right > 0){
+                    right--;
                     sb.append(c);
                 }
+            }else {
+                sb.append(c);
             }
-            return sb.reverse().toString();
         }
-
-        return sb.toString();
+        return sb.reverse().toString();
     }
