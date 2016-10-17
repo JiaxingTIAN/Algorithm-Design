@@ -158,7 +158,7 @@ public void remove(String s, List<String> ans, int last_i, int last_j,  char[] p
             if (c == '('){
                 left++;
                 sb.append(c);
-            }else if(c == ')'){ //skip ) when left == 0
+            }else if(c == ')'){ //skip ) when left == 0, which it is invalid
                 if(left > 0){
                     left--;
                     sb.append(c);
