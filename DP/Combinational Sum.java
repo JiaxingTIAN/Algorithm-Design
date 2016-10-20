@@ -7,7 +7,7 @@ public class Solution {
         findNum(list, cands, 0, target, 0);
         return res;
         /*
-        //DP Approach O(target^2 * N)
+        //DP Approach O(target * N)
         Arrays.sort(cands); //sort the array to avoid duplication
         List<List<List<Integer>>> dp = new ArrayList<>();   //DP [value][all list sum up to value][sum up to value]
         for(int i = 1; i <= target; i++){   //for value 1 to target
