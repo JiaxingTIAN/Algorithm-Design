@@ -63,7 +63,7 @@ public class Solution {
      *            /  \     / \
      *           3   2    2  1
      *          / \ / \  / \
-     *         2  11  0 1  0
+     *         2  1 1  0 1  0
      *        / \
      *       1  0
      *      Running Time Tn = T(n-1) T(n-2)
