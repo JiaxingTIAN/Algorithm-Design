@@ -6,7 +6,28 @@ public class Solution {
         List<Integer> list = new LinkedList<>();
         findNum(list, cands, 0, target, 0);
         return res;
-        /*
+    }
+    //DFS O(target^N)
+    public void findNum(List nums, int[] candidates, int sum, int target, int start){
+        
+        if(sum == target) {
+            res.add(new LinkedList(nums));
+            return;
+        }
+        if(sum>target){
+            return;
+        }
+        for(int i = start;i<candidates.length && sum + candidates[i] <= target;i++){
+            nums.add(candidates[i]);
+            findNum(nums, candidates, sum+candidates[i], target, i);
+            nums.remove(nums.size()-1);
+        }
+       
+    }
+}
+public class Solution{
+    public List<List<Integer>> combinationSum(int[] cands, int target){
+        
         //DP Approach O(target * N)
         Arrays.sort(cands); //sort the array to avoid duplication
         List<List<List<Integer>>> dp = new ArrayList<>();   //DP [value][all list sum up to value][sum up to value]
@@ -30,23 +51,5 @@ public class Solution {
             dp.add(list);
         }
         return dp.get(target - 1);
-        */
-    }
-    //DFS O(target^N)
-    public void findNum(List nums, int[] candidates, int sum, int target, int start){
-        
-        if(sum == target) {
-            res.add(new LinkedList(nums));
-            return;
-        }
-        if(sum>target){
-            return;
-        }
-        for(int i = start;i<candidates.length && sum + candidates[i] <= target;i++){
-            nums.add(candidates[i]);
-            findNum(nums, candidates, sum+candidates[i], target, i);
-            nums.remove(nums.size()-1);
-        }
-       
     }
 }
