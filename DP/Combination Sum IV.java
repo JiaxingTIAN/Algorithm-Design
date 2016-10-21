@@ -1,5 +1,5 @@
 public class Solution {
-    
+    //Recursion appoarch n^target
     public int combinationSum4(int[] nums, int target) {
         if(target == 0){
             return 1;   //base case target value 0 <= [0] 
@@ -14,7 +14,7 @@ public class Solution {
     }
 }
 
-//A better version with memoization
+//A better version with memoization O(MN)
 public class Solution {
     public int combinationSum4(int[] nums, int target) {
         if(nums == null || nums.length == 0){
@@ -38,4 +38,22 @@ public class Solution {
     }
 }
 
-//Bottom Up Solution with DP
+//Bottom Up Solution with DP O(MN)
+public class Solution {
+    public int combinationSum4(int[] nums, int target) {
+        if(nums == null || nums.length == 0){
+            return 0;
+        }
+        int[]dp = new int[target + 1];  //DP dp[target] count of result for target value
+        dp[0] = 1; //base case
+        for(int i=1; i<=target; i++){
+            //Try all the elements from the array for each target value
+            for(int j=0; j<nums.length; j++){
+                if(i >= nums[j]){
+                    dp[i] += dp[i - nums[j]];
+                }
+            }
+        }
+        return dp[target];
+    }
+}
