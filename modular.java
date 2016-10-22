@@ -9,6 +9,12 @@ public static int module(int x, int n, int m){
         }
     }
 
+/*
+a ^ 1234567 %M = (a^1234560%M * a^7%M) %M = (a^123456%M)^10 %M * a^7%M %M
+
+= (a^10%M)^123456%M * (a^7%M) %M
+start from last digit: res * (a^7 %M) %M 
+*/
 
 public class Solution {
     private static final int M = 1337;
