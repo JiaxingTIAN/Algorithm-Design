@@ -5,7 +5,7 @@ public class Solution {
         }
         return dfs(stones, 0, 1);
     }
-    
+    //Baise DFS solution each time 3 steps => O(3^n) 
     public boolean dfs(int[] stones, int idx, int step){
         if(idx == stones.length-1){
             return true;
@@ -21,7 +21,7 @@ public class Solution {
     }
 }
 
-
+//DP solution store the stone location and step => Worset Case O(n^2)
 public class Solution {
     public boolean canCross(int[] stones) {
         if(stones == null || stones.length == 0){
