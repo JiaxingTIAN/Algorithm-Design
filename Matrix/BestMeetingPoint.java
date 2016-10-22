@@ -60,3 +60,34 @@ public class Solution {
         }
     }
 }
+
+public class Solution {
+    public int minTotalDistance(int[][] grid) {
+        if(grid == null || grid.length == 0 || grid[0].length == 0)
+            return 0;
+        
+        List<Integer> row = new ArrayList<>();
+        List<Integer> col = new ArrayList<>();
+        int n = grid.length, m = grid[0].length;
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(grid[i][j] == 1){
+                    row.add(i); //For row distance convert all house to one demision
+                    col.add(j); //For col distance
+                }
+            }
+        }
+        return getDist(row) + getDist(col);
+    }
+    
+    public int getDist(List<Integer> list){
+        //Get equal number of houses on both side
+        Collections.sort(list);
+        int i = 0, j = list.size() - 1;
+        int dist = 0;
+        while(i < j){
+            dist += list.get(j--) - list.get(i++);
+        }
+        return dist;
+    }
+}
