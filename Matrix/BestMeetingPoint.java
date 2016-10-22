@@ -79,9 +79,11 @@ public class Solution {
         }
         return getDist(row) + getDist(col);
     }
-    
+    //Time O(NlogN)
     public int getDist(List<Integer> list){
         //Get equal number of houses on both side
+        //If even number of house, any place in between is fine
+        //If odd number of house, chose the middle house, distance to the middel house is 0
         Collections.sort(list);
         int i = 0, j = list.size() - 1;
         int dist = 0;
