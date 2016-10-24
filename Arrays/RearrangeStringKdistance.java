@@ -4,8 +4,8 @@ public class Solution {
             return "";
         int n = str.length();
         StringBuilder sb = new StringBuilder();
-        int [] count = new int[26];
-        int [] pos = new int[26];
+        int [] count = new int[26]; //Count of character
+        int [] pos = new int[26];   //Next valid position
         for(char a:str.toCharArray()){
             count[a - 'a']++;
         }
@@ -13,7 +13,7 @@ public class Solution {
             int next = findNext(count, pos, i);
             if(next == -1) return "";
             count[next]--;
-            pos[next] = i + k;
+            pos[next] = i + k;  //Update next valid position
             sb.append((char)('a'+next));
         }
         return sb.toString();
@@ -23,11 +23,11 @@ public class Solution {
         int res = -1;
         int max = 0;
         for(int i=0; i<26; i++){
-            if(count[i] > max && pos[i] <= idx){
-                res = i;
+            if(count[i] > max && pos[i] <= idx){    //Find the character with most count 
+                res = i;                            //And current position >= valid position
                 max = count[i];
             }
         }
-        return res;
+        return res; //return the character index
     }
 }
