@@ -31,44 +31,52 @@ public class NumArray {
 
 
 public class NumArray {
-    //Binary Index Tree
-    int[] nums;
-    int[] BIT;
+    int [] bit;
+    int [] num;
     int n;
     public NumArray(int[] nums) {
-        this.nums = nums;
+        this.num = nums;
         n = nums.length;
-        BIT = new int[n+1];
-        for(int i=0;i<n;i++)
+        bit = new int[n+1];     //padding with 0
+        for(int i=0; i<n; i++)  //Update the whole array
             init(i, nums[i]);
     }
     
     public void init(int i, int val){
-        i++;
-        while(i<=n){
-            BIT[i] += val;
-            i += (i&-i);
+        i++;    //padding with 0 increment first
+        while(i <= n){
+            bit[i] += val;
+            i = i + (i & -i);
         }
     }
+
     void update(int i, int val) {
-        int diff = val - nums[i];
-        nums[i] = val;
+        int diff = val - num[i];
+        num[i] = val;
         init(i, diff);
     }
+
     public int getSum(int i){
-        int sum = 0;
+        int res = 0;
         i++;
-        while(i>0){
-            sum+=BIT[i];
-            i-=(i&-i);
-        }
-        return sum;
+        while(i > 0){
+            res += bit[i];
+            i = i - (i & -i);   //Obtain the last non zero bit i&-i
+        }                       //Remove the last non zero bit for parent
+        return res;             //bit[i] store sum of value from parent (exclusive parent)
     }
+    
     public int sumRange(int i, int j) {
         return getSum(j) - getSum(i-1);
     }
 }
 
+
+// Your NumArray object will be instantiated and called as such:
+// NumArray numArray = new NumArray(nums);
+// numArray.sumRange(0, 1);
+// numArray.update(1, 10);
+// numArray.sumRange(1, 2);
 
 // Your NumArray object will be instantiated and called as such:
 // NumArray numArray = new NumArray(nums);
