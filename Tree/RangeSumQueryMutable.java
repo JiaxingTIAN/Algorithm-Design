@@ -70,6 +70,36 @@ public class NumArray {
         return getSum(j) - getSum(i-1);
     }
 }
+public class NumArray {
+    int [] bit;
+    int [] num;
+    int n;
+    public NumArray(int[] nums) {
+        n = nums.length;
+        num = new int[n];
+        bit = new int[n+1];     //padding with 0
+        for(int i=0; i<n; i++)  //Update the whole array
+            update(i, nums[i]);
+    }
+    
+    void update(int i, int val) {
+        int diff = val - num[i];
+        num[i] = val;
+        for(int k=i+1; k<=n; k += (k&-k))
+            bit[k] += diff;
+    }
+
+    public int getSum(int i){
+        int res = 0;
+        for(int k=i+1; k > 0; k -= (k&-k))  //Obtain the last non zero bit i&-i
+             res += bit[k];                 //Remove the last non zero bit for parent
+        return res;                         //bit[i] store sum of value from parent (exclusive parent)
+    }
+    
+    public int sumRange(int i, int j) {
+        return getSum(j) - getSum(i-1);
+    }
+}
 
 
 // Your NumArray object will be instantiated and called as such:
