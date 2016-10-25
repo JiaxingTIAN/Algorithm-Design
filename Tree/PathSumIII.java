@@ -27,24 +27,24 @@ public class Solution {
     }
     
     //Time Complexity O(N)
-    public int pathSum2(TreeNode root, int sum) {
-        HashMap<Integer, Integer> preSum = new HashMap();
-        preSum.put(0,1);
-        return helper(root, 0, sum, preSum);
-    }
-    
-    public int helper(TreeNode root, int sum, int target, HashMap<Integer, Integer> preSum) {
-        if (root == null) {
+    public int pathSum(TreeNode root, int sum) {
+        if(root == null)
             return 0;
-        }
-        
+        //return findPath(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);  //Default sum = 0 has one res
+        return backtrack(root, 0, sum, map); 
+    }
+    //BackTrach one pass
+    public int backtrack(TreeNode root, int sum, int target, Map<Integer, Integer> map){
+        if(root == null)
+            return 0;
         sum += root.val;
-        int res = preSum.getOrDefault(sum - target, 0);
-        preSum.put(sum, preSum.getOrDefault(sum, 0) + 1);
-        
-        res += helper(root.left, sum, target, preSum) + helper(root.right, sum, target, preSum);
-        preSum.put(sum, preSum.get(sum) - 1);
+        int res = map.getOrDefault(sum - target, 0);    //See if there is a subarray sum equals to target
+        map.put(sum, map.getOrDefault(sum, 0)+1);
+        //Extend to left and right child
+        res += backtrack(root.left, sum, target, map) + backtrack(root.right, sum, target, map);
+        map.put(sum, map.get(sum)-1);   //Remove the current node so it wont affect other path
         return res;
     }
-   
 }
