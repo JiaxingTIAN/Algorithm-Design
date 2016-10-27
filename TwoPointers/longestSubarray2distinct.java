@@ -22,6 +22,27 @@ public class Solution {
         return max;
     }
     
+    public int lengthOfLongestSubstringTwoDistinct1(String s) {
+        if(s == null || s.length() == 0)
+            return 0;
+        int n = s.length();
+        char[] ch = s.toCharArray();
+        Map<Character, Integer> map = new HashMap<>();
+        int max = 0;
+        for(int i=0, j=0; j<n; j++){
+            if(map.size() <= 2){
+                map.put(ch[j], map.getOrDefault(ch[j], 0)+1);
+            }
+            while(map.size() > 2){
+                map.put(ch[i], map.get(ch[i])-1);
+                if(map.get(ch[i]) == 0) map.remove(ch[i]);
+                i++;
+            }
+            max = Math.max(j-i+1, max);
+        }
+        return max;
+    }
+    
     public int lengthOfLongestSubstringTwoDistinct2(String s) {
         if(s == null || s.length() == 0){
             return 0;
