@@ -34,19 +34,21 @@ public class Solution {
 
 public class Solution {
     public int wordsTyping(String[] sentence, int rows, int cols) {
+        // repeat sentence->hello world hello world hello world hello world
+        // Find the start location for each row => start from a word
+        // Find the rows + 1 start location and that is acutally the reachable length
         String s = String.join(" ", sentence) + " ";
-        int start = 0, l = s.length();
-        for (int i = 0; i < rows; i++) {
+        int len = s.length();
+        int start = 0;
+        for(int i=0; i<rows; i++){
             start += cols;
-            if (s.charAt(start % l) == ' ') {
-                start++;
-            } else {
-                while (start > 0 && s.charAt((start-1) % l) != ' ') {
+            if(s.charAt(start%len) == ' ')
+                start++;    //white space increase to next word
+            else{
+                while(start > 0 && s.charAt((start-1)%len) != ' ')
                     start--;
-                }
             }
-        }
-        
-        return start / s.length();
+        }//Reach start of rows + 1 => actual fitting length
+        return start/len;
     }
 }
