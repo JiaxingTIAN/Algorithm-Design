@@ -4,4 +4,13 @@ public class Solution{
             return null;
         TreeNode ancester = root;
         while(true){
-            if(
+            if(p.val < ancester.val && q.val < ancester.val)
+                ancester = ancester.left;
+            else if(p.val > ancester.val && q.val > ancester.val)
+                ancester = ancester.right;
+            else
+                break;
+        }
+        return ancester;
+    }
+}
