@@ -102,3 +102,57 @@ public class Solution {
         return list;
     }
 }
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+//Naive Recursion O(N!) 
+//Memoization O(N^3) 
+public class Solution {
+    public List<TreeNode> generateTrees(int n) {
+        if(n==0) 
+            return new ArrayList<TreeNode>();
+        List<TreeNode>[][] dp = new List[n+1][n+1];
+        return generateNode(dp, 1, n);
+        
+        for(int i=1; i<=n; i++){
+            for(int j=i; j<=n; j++){
+                
+            }
+        }
+    }
+    public List<TreeNode> generateNode(List<TreeNode>[][]dp, int start, int end){
+        System.out.println("Hello World.");
+        List<TreeNode> list = new ArrayList();
+        if(start > end){
+            list.add(null);
+            return list;
+        }
+        if(dp[start][end] != null){
+            return dp[start][end];
+        }
+        System.out.println("Building: "+ start + " to " + end);
+        //Try for every value
+        for(int i=start;i<=end;i++){
+            List<TreeNode> left = generateNode(dp, start, i-1);
+            List<TreeNode> right = generateNode(dp, i+1, end);
+            for(TreeNode l:left){
+                for(TreeNode r:right){
+                    TreeNode root = new TreeNode(i);
+                    root.left = l;
+                    root.right = r;
+                    list.add(root);
+                }
+            }
+        }
+        dp[start][end] = list;
+        return list;
+    }
+}
