@@ -55,32 +55,20 @@ public class Solution {
  */
 public class Solution {
     public RandomListNode copyRandomList(RandomListNode head) {
-        if(head == null){
-            return null;
-        }
-        //Use hashmap as a cache
-        Map<RandomListNode, RandomListNode> map = new HashMap<>();
-        //Copy all the node and put the in the map
         RandomListNode cur = head;
+        Map<RandomListNode, RandomListNode> map = new HashMap<>();
         while(cur != null){
-            RandomListNode copy = new RandomListNode(cur.label);
-            map.put(cur, copy);
+            map.put(cur, new RandomListNode(cur.label));
             cur = cur.next;
         }
-        //Add connections next and random
         cur = head;
         while(cur != null){
             RandomListNode node = map.get(cur);
             node.next = map.get(cur.next);
-            
-            if(cur.random != null){
+            if(cur.random != null)
                 node.random = map.get(cur.random);
-            }else{
-                node.random = null;
-            }
             cur = cur.next;
         }
-        
         return map.get(head);
     }
 }
