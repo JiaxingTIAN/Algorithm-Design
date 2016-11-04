@@ -91,3 +91,59 @@ public class Solution {
     }
 }
 ```
+**Bottom Up as a follow up**
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> res = new LinkedList<>();
+        if(root == null){
+            return res;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            List<Integer> list = new LinkedList<>();
+            int size = queue.size();
+            for(int i=0; i<size; i++){
+                TreeNode cur = queue.poll();
+                list.add(cur.val);
+                if(cur.left != null){
+                    queue.offer(cur.left);
+                }
+                if(cur.right != null){
+                    queue.offer(cur.right);
+                }
+            }
+            res.add(0, list);
+        }
+        return res;
+        //List<List<Integer>> res = new ArrayList<>();
+        //dfs(root, res, 0);
+        //return res;
+    }
+    //DFS => NOT GOOD 
+    public void dfs(TreeNode node, List<List<Integer>> res, int level){
+        if(node == null){
+            return;
+        }
+        //Need to add new list to the front
+        if(level >= res.size()){
+            res.add(0, new LinkedList<>());
+        }
+        //get the list to be added
+        res.get(res.size() - level - 1).add(node.val);
+        //Continue dfs
+        dfs(node.left, res, level+1);
+        dfs(node.right, res, level+1);
+    }
+    
+}
