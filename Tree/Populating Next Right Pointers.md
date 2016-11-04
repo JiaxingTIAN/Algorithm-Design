@@ -35,7 +35,7 @@ After calling your function, the tree should look like:
 ```
 
 **_Code_** 
-```
+```java
 /*
 *Definition for binary tree with next pointer.
 *public class TreeLinkNode {
