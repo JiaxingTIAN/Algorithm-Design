@@ -48,6 +48,7 @@ public static int rank(String str){
 ```
 Time Complexity O(n) with auxiliary array to store the count of smaller character
 ##Nth permutation sequence
+There are number from 1 to n, find the kth permutation in lexilogical order
 ```java
 public class Solution {
     public String getPermutation(int n, int k) {
