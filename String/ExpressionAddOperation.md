@@ -17,6 +17,7 @@ Try different substring as number each with + - * operation
 T(n) = 3 * T(n-1) + 3 * T(n-2) + 3 * T(n-3) + ... + 3 *T(1);
 T(n-1) = 3 * T(n-2) + 3 * T(n-3) + ... 3 * T(1);
 Thus T(n) = 4T(n-1);
+O(4^n)
 ```
 Can be optimized with string builder
 ```java
