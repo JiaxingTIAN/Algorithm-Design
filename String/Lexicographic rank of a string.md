@@ -47,4 +47,26 @@ public static int rank(String str){
     }
 ```
 Time Complexity O(n) with auxiliary array to store the count of smaller character
-
+##Nth permutation sequence
+```java
+public class Solution {
+    public String getPermutation(int n, int k) {
+        List<Integer> nums = new ArrayList<>();  //Pool of available numbers
+        int [] fac = new int[n+1];
+        fac[0]=1;
+        for(int i=1; i<=n; i++){
+            nums.add(i);    //Add available numbers to the pool
+            fac[i] = fac[i-1]*i;    //Compute the factorial
+        }
+        k--;
+        StringBuilder sb = new StringBuilder();
+        for(int i=1; i<=n; i++){
+            int idx = k/fac[n-i];       //Get the current number idx in the list
+            sb.append(nums.get(idx));   //append to the result
+            nums.remove(idx);           //Remove the number from the pool
+            k = k - idx * fac[n-i];
+        }
+        return sb.toString();
+    }
+}
+```
