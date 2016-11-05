@@ -52,6 +52,7 @@ public class Solution {
     }
 }
 ```
+**StringBuilder setLength(origin len) to restore**
 ```java
 public class Solution {
     public List<String> addOperators(String num, int target) {
