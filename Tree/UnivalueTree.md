@@ -38,7 +38,7 @@ public class Solution {
         }
         boolean left = count(root.left);
         boolean right = count(root.right);
-        if(left && right){
+        if(left && right){  //True for left and right
             if(root.left != null && root.val != root.left.val)
                 return false;
             if(root.right != null && root.val != root.right.val)
@@ -46,7 +46,7 @@ public class Solution {
             count++;
             return true;
         }
-        return false;
+        return false; //Return false if left or right not true
     }
 }
 ```
