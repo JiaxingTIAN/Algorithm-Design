@@ -8,7 +8,7 @@
         mergeSort(arr, low, mid);
         mergeSort(arr, mid + 1, high);
         //Merge
-        int[] tmp = new int[high - low + 1];
+        int[] tmp = new int[high - low + 1];    //A good solution is keep reuse same tmp array
         int j = mid + 1, idx = 0;
         for (int i=low; i<=mid; i++){
             while(j <= high && arr[j] < arr[i])
