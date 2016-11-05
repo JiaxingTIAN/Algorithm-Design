@@ -19,7 +19,8 @@ Return true. All 5 rectangles together form an exact cover of a rectangular regi
 Check two things
 * all the small rectangle sum up to large rectangle
 * The count of 4 cornor points should be one, other point should be even => Finally there is 4 points with x1 x2 y1 y2 exists in the HashSet
-*Time Complexity O(n)*
+
+**Time Complexity O(n)**
 ```java
 public class Solution {
     public boolean isRectangleCover(int[][] rectangles) {
