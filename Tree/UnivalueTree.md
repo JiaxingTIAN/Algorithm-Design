@@ -1,4 +1,4 @@
-#250. Count Univalue Subtrees   QuestionEditorial Solution  My Submissions
+#250. Count Univalue Subtrees
 
 Given a binary tree, count the number of uni-value subtrees.
 
