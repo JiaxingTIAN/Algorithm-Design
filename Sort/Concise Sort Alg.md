@@ -1,3 +1,6 @@
+#Sorting Alg
+* Merge Sort divide and conquer
+```java
     public static void mergeSort(int[]arr, int low, int high){
         if(low >= high)
             return;
@@ -14,7 +17,9 @@
         }
         System.arraycopy(tmp, 0, arr, low, j - low);
     }
-
+```
+* Quick Sort 
+```java
     public static void quickSort(int[]arr, int low, int high){
         if(low >= high)
             return;
@@ -34,3 +39,4 @@
         nums[i] = nums[j];
         nums[j] = tmp;
     }
+```
