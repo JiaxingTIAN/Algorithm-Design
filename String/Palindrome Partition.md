@@ -21,7 +21,7 @@ Tn  = Tn-1 + Tn-2 + Tn-3 + ... T1
 Tn-1 = Tn-2 + Tn-3 + ...
 Tn = Tn-1 + Tn-1
 Tn = 2Tn-1
-Tn = O(n^2)
+Tn = O(2^n)
 ```
 
 ```java
