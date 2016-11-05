@@ -52,3 +52,39 @@ public class Solution {
     }
 }
 ```
+```java
+public class Solution {
+    public List<String> addOperators(String num, int target) {
+        List<String> res = new ArrayList<>();
+        if(num == null || num.length() == 0)
+            return res;
+        dfs(num, target, res, new StringBuilder(), 0, 0, 0);
+        return res;
+    }
+    //Time O(4^n)
+    public void dfs(String num, int target, List<String> res, StringBuilder sb, long val, long pre, int start){
+        if(start == num.length()){    //Reach the end
+            if(val == target)   //Add if target equals to val
+                res.add(sb.toString());
+            return;
+        }
+        for(int i=start; i<num.length(); i++){
+            if(i>start && num.charAt(start) == '0')
+                break;  //Skip all subsequence when leading zero
+            long cur = Long.parseLong(num.substring(start, i+1));   //Avoid overflow
+            int len = sb.length();
+            if(start == 0){ //No leading operations
+                dfs(num, target, res, sb.append(cur), cur, cur, i+1);
+                sb.setLength(len);
+            }else{
+                dfs(num, target, res, sb.append("+" + cur), val + cur, cur, i+1);
+                sb.setLength(len);
+                dfs(num, target, res, sb.append("-" + cur), val - cur, -cur, i+1);
+                sb.setLength(len);
+                dfs(num, target, res, sb.append("*" + cur), val-pre+pre*cur, pre*cur, i+1);
+                sb.setLength(len);
+            }
+        }
+    }
+}
+```
