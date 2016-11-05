@@ -12,11 +12,39 @@ I X X X X X
 N X X X X X
 G X X X X X
 ```
->Now let us Fix S’ and find the smaller strings staring with.
+Now let us Fix S’ and find the smaller strings staring with.
 Repeat the same process for T, rank is 4*5! + 4*4! +…
 Now fix T and repeat the same process for R, rank is 4*5! + 4*4! + 3*3! +…
 Now fix R and repeat the same process for I, rank is 4*5! + 4*4! + 3*3! + 1*2! +…
 Now fix I and repeat the same process for N, rank is 4*5! + 4*4! + 3*3! + 1*2! + 1*1! +…
-Now fix N and repeat the same process for G, rank is 4*5! + 4*4 + 3*3! + 1*2! + 1*1! + 0*0!
+Now fix N and repeat the same process for G, rank is 4*5! + 4*4! + 3*3! + 1*2! + 1*1! + 0*0!
 Rank = 4*5! + 4*4! + 3*3! + 1*2! + 1*1! + 0*0! = 597
+Time O(n^2) for the following algorithm
+```java
+public static int rank(String str){
+        int rank = 1;
+        int[]fac = new int[str.length()];
+        int n = str.length();
+        fac[0] = 1;
+        for(int i=1; i<n; i++){
+            fac[i] = fac[i-1]*i;
+        }
+        for(int i=0; i<n;i++){
+            int s = findSmall(str, str.charAt(i), i);
+            rank += s*fac[n-i-1];
+        }
+        return rank;
+    }
+
+    public static int findSmall(String str, char c, int idx){
+        int count = 0;
+        for(int i= idx + 1; i<str.length(); i++){
+            if(str.charAt(i) < c){
+                count++;
+            }
+        }
+        return count;
+    }
+```
+Time Complexity O(n) with auxiliary array to store the count of smaller character
 
