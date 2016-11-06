@@ -60,8 +60,9 @@ public class Solution {
             return 1;
         visit[cur] = true;
         int res = 0;
-        for(int i=1; i<=9; i++){    //Try for next number 0-9
-            if(!visit[i] && (skip[cur][i]==0||visit[skip[cur][i]])){ //Not visited and no skip or skip is visited
+        for(int i=1; i<=9; i++){    //Try for next number vary from 0-9
+            if(!visit[i] && (skip[cur][i]==0||visit[skip[cur][i]])){ 
+            //Not visited and no skip or skip is visited
                 res += dfs(skip, visit, i, remain-1);
             }
         }
