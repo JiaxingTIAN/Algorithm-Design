@@ -65,7 +65,7 @@ public class Solution {
                 res += dfs(skip, visit, i, remain-1);
             }
         }
-        visit[cur] =false;
+        visit[cur] =false;  //Dont forget to restore after search
         return res;
     }
 }
