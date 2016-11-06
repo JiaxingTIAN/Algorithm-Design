@@ -52,7 +52,7 @@ public class Solution {
         }
         return res;
     }
-    
+    //Start from cur, remain is the step need to dial
     public int dfs(int[][]skip, boolean[]visit, int cur, int remain){
         if(remain < 0)
             return 0;
