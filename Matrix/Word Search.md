@@ -16,7 +16,7 @@ word = "ABCCED", -> returns true,
 word = "SEE", -> returns true,
 word = "ABCB", -> returns false.
 
-**ALG**
+**ALG Time Complexity O((MN)^2)**
 
 DFS BackTrack from each cell for word 
 
@@ -73,23 +73,24 @@ Given words = ["oath","pea","eat","rain"] and board =
 ```
 Return ["eat","oath"].
 
-**DFS with Trie, Search through each cell if !trie.startsWith return, if trie.search true add the word**
+**DFS with Trie, Search through each cell if !trie.startsWith return, if trie.search true add the word. Time O(MN)^2**
 ```java
 public class Solution {
-    Set<String> set = new HashSet<>();
+    Set<String> set = new HashSet<>();  //Store result in a set avoid duplicate
     public List<String> findWords(char[][] board, String[] words) {
         if(board == null || board.length == 0 || board[0].length == 0){
             return new ArrayList<>();
         }
         Trie trie = new Trie();
         for(String w:words){
-            trie.insert(w);
+            trie.insert(w); //Insert all the words to build the trie
         }
         
         int n = board.length, m = board[0].length;
-        boolean[][]visit = new boolean[n][m];
+        boolean[][]visit = new boolean[n][m]; //Keep a visit list
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
+            //DFS start of word from each cell
                 dfs(board, "", visit, i, j, trie);
             }
         }
@@ -98,18 +99,18 @@ public class Solution {
     int[][]dir = new int[][]{{0,1},{0,-1},{1,0},{-1,0}};
     public void dfs(char[][]board, String cur, boolean[][]visit, int r, int c, Trie trie){
         int n = board.length, m = board[0].length;
-        if(r<0 || r>=n || c<0 || c>=m || visit[r][c])
+        if(r<0 || r>=n || c<0 || c>=m || visit[r][c]) //Return if out of bound or visited
             return;
-        cur += board[r][c];
+        cur += board[r][c]; //Update the string
         if(!trie.startsWith(cur))
-            return;
+            return; //If no words start with string return
         if(trie.search(cur))
-            set.add(cur);
+            set.add(cur); //If words exist add to set
         visit[r][c] = true;
-        for(int []d:dir){
+        for(int []d:dir){ //Continue search for neighbors
             dfs(board, cur, visit, r+d[0], c+d[1], trie);
         }
-        visit[r][c] = false;
+        visit[r][c] = false;  //DONT forget to restore visit list
     }
     
     class TrieNode {
