@@ -1,48 +1,45 @@
-**
- * Definition for a point.
- * class Point {
- *     int x;
- *     int y;
- *     Point() { x = 0; y = 0; }
- *     Point(int a, int b) { x = a; y = b; }
- * }
- */
 public class Solution {
-    /**
-     * @param n an integer
-     * @param m an integer
-     * @param operators an array of point
-     * @return an integer array
-     */
-    public List<Integer> numIslands2(int n, int m, Point[] operators) {
-        // Write your code here
-        List<Integer> ans = new LinkedList<>();
-        if(n<=0 || m<=0 || operators==null || operators.length==0)
-            return ans;
-        
-        int[] root = new int[n*m];
-        Arrays.fill(root, -1);
-        
-        int[][] dir = {{1,0},{-1,0},{0,1},{0,-1}};
+    int[]roots;
+    int[][] dir = {{1,0},{-1,0},{0,1},{0,-1}};
+    public List<Integer> numIslands2(int m, int n, int[][] positions) {
+        List<Integer> res = new ArrayList<>();
+        if(m <= 0 || n <= 0)
+            return res;
+        roots = new int[m*n];
+        Arrays.fill(roots, -1); //-1 for unvisited
         int count = 0;
-        
-        for(int i=0; i<operators.length; i++){
+        for(int[]p:positions){
+            int root = n * p[0] + p[1];     // assume new point is isolated island
+            roots[root] = root;             // add new island
             count++;
-            int px = operators[i].x, py = operators[i].y;
-            int id = px * m + py;
-            root[id] = id;  //Set the root to be itself
-
-            for(int j=0; j<4; j++){
-                int x = px + dir[j][0];
-                int y = py + dir[j][1];
-                if(x>=0&&x<n&&y>=0&&y<m&&root[x*m + y]!=-1&&getRoot(root, x*m + y)!=id){
-                    root[getRoot(root, x*m + y)] = id;
-                    count --;
+            for(int[]d:dir){
+                int x = p[0] + d[0];
+                int y = p[1] + d[1];
+                if(x < 0 || x >= m || y < 0 || y >= n || roots[x*n+y] == -1)
+                    continue;
+                int fax = find(root);
+                int fay = find(x*n+y);
+                if(fax != fay){
+                    roots[fax] = fay;
+                    count--;
                 }
             }
-            ans.add(count);
+            res.add(count);
         }
-        return ans;
+        return res;
+    }
+    //Compress Union Find
+    public int find(int num){
+        int fa = num;
+        while(fa != roots[fa]){
+            fa = roots[fa];
+        }
+        while(num != roots[num]){
+            int tmp = roots[num];
+            roots[num] = fa;
+            num = tmp;
+        }
+        return fa;
     }
     //find boss and path compression
     public int getRoot(int[] root, int id){
@@ -51,5 +48,12 @@ public class Solution {
         }
         root[id] = getRoot(root, root[id]);
         return root[id];
+    }
+    public void union(int x, int y){
+        int fax = find(x);
+        int fay = find(y);
+        if(fax != fay){
+            roots[fax] = fay;
+        }
     }
 }
