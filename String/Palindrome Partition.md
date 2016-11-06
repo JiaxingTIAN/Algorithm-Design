@@ -68,6 +68,12 @@ Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 
 **Alogrithm**
 use cut[i] to record the min cut from 0 to i
 pali(i, j) = true if from i to j form a palindrome
+```
+a   b   a   |   c  c
+                j  i
+       j-1  |  [j, i] is palindrome
+   cut(j-1) +  1
+```
 This can be solved by two points:
 
 * cut[i] is the minimum of cut[j - 1] + 1 (j <= i), if [j, i] is palindrome.
