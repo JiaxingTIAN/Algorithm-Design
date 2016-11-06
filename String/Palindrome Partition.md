@@ -57,3 +57,42 @@ public class Solution {
     }
 }
 ```
+##Palindrome Partition II
+Given a string s, partition s such that every substring of the partition is a palindrome.
+
+Return the minimum cuts needed for a palindrome partitioning of s.
+
+For example, given s = "aab",
+Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut.
+
+**Alogrithm**
+use cut[i] to record the min cut from 0 to i
+pali(i, j) = true if from i to j form a palindrome
+This can be solved by two points:
+
+* cut[i] is the minimum of cut[j - 1] + 1 (j <= i), if [j, i] is palindrome.
+* If  [j + 1, i - 1] is palindrome, and c[j] == c[i] =>> [j, i] is palindrome,
+
+```java
+public class Solution {
+    public int minCut(String s) {
+        char[] ch = s.toCharArray();
+        int n = s.length();
+        int[]dp = new int[n];
+        boolean[][]pali = new boolean[n][n];
+        
+        for(int i=0; i<n; i++){
+            int min = i;
+            for(int j=0; j<=i; j++){
+                if(ch[i] == ch[j] && (j+1 > i-1 || pali[j+1][i-1])){  
+                    //Valid palindrome
+                    min = j==0?0:Math.min(min, dp[j-1]+1);
+                    pali[j][i] = true;
+                }
+            }
+            dp[i] = min;
+        }
+        return dp[n-1];
+    }
+}
+```
