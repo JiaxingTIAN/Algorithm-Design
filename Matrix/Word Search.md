@@ -19,6 +19,7 @@ word = "ABCB", -> returns false.
 **ALG**
 
 DFS BackTrack from each cell for word 
+
 1. return true if reach the end of string
 2. return false if out of bound or not match 
 3. continue search in four neighbor for word
