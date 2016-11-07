@@ -165,16 +165,8 @@ public class BSTIterator {
   * Push all left node of root onto stack when initalize
   * hasNext return stack empty
   * next return stack pop then push all left node of node.right to the stack
- ```java/**
- * Definition for binary tree
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
 
+```java
 public class BSTIterator {
     Stack<TreeNode> stack;
     public BSTIterator(TreeNode root) {
@@ -201,10 +193,5 @@ public class BSTIterator {
     }
 }
 
-/**
- * Your BSTIterator will be called like this:
- * BSTIterator i = new BSTIterator(root);
- * while (i.hasNext()) v[f()] = i.next();
- */
  ```
  
