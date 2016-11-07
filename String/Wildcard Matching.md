@@ -49,7 +49,7 @@ public class Solution {
     }
 }
 ```
-** ALG - Two pointer **
+**ALG - Two pointer**
 ```java
 boolean comparison(String str, String pattern) {
         int s = 0, p = 0, match = 0, starIdx = -1;            
