@@ -51,35 +51,34 @@ public class Solution {
 ```
 **ALG - Two pointer**
 ```java
-boolean comparison(String str, String pattern) {
-        int s = 0, p = 0, match = 0, starIdx = -1;            
-        while (s < str.length()){
-            // advancing both pointers
-            if (p < pattern.length()  && (pattern.charAt(p) == '?' || str.charAt(s) == pattern.charAt(p))){
-                s++;
-                p++;
+public class Solution {
+    public boolean isMatch(String s, String p) {
+        int n = s.length(), m = p.length();
+        int ps = 0, pp = 0, match = 0, idx = -1;
+        while(ps < n){
+            //Both advance 
+            if(pp < m && (s.charAt(ps) == p.charAt(pp)||p.charAt(pp) == '?')){
+                ps++;
+                pp++;
             }
-            // * found, only advancing pattern pointer
-            else if (p < pattern.length() && pattern.charAt(p) == '*'){
-                starIdx = p;
-                match = s;
-                p++;
+            //advance pattern store the index of s and p to restore latter
+            else if(pp < m && p.charAt(pp) == '*'){
+                idx = pp;
+                pp++;
+                match = ps;
             }
-           // last pattern pointer was *, advancing string pointer
-            else if (starIdx != -1){
-                p = starIdx + 1;
+            //restore the previous match from * advance string pointer 
+            else if(idx != -1){
+                pp = idx + 1;
                 match++;
-                s = match;
+                ps = match;
             }
-           //current pattern pointer is not star, last patter pointer was not *
-          //characters do not match
-            else return false;
+            else 
+                return false;
         }
-        
-        //check for remaining characters in pattern
-        while (p < pattern.length() && pattern.charAt(p) == '*')
-            p++;
-        
-        return p == pattern.length();
+        while(pp < m && p.charAt(pp) == '*')
+            pp++;
+        return pp == m;
+    }
 }
 ```
