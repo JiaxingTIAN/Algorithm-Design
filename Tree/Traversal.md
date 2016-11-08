@@ -100,3 +100,33 @@ public class Solution {
     }
 }
 ```
+##Construct Tree from preorder and inorder
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder==null||preorder==null) return null;
+        HashMap<Integer, Integer> hm = new HashMap();
+        for(int i=0;i<inorder.length;i++)
+            hm.put(inorder[i], i);  //For fast retrieve
+        return buildTree(inorder, 0, inorder.length-1, preorder, 0, preorder.length-1, hm);
+    }
+    public TreeNode buildTree(int[]inorder, int is, int ie, int[]preorder, int ps, int pe, HashMap<Integer, Integer> hm){
+        if(is>ie||ps>pe) 
+            return null;
+        TreeNode root = new TreeNode(preorder[ps]); //Root is the preorder start
+        int idx = hm.get(preorder[ps]); //Find root in inorder
+        root.left = buildTree(inorder, is, idx-1, preorder, ps+1, ps+idx-is, hm);
+        root.right = buildTree(inorder, idx+1, ie, preorder, ps+idx-is+1, pe, hm);
+        return root;
+    }
+}
+```
