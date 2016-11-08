@@ -182,3 +182,37 @@ public int diameter(TreeNode n){
     int l2 = Math.max(diameter(n.left), diameter(n.right)); //Dont go through root
     return Math.max(l1, l2);
 }
+```
+
+##PreOrder Traversal Iterator
+```java
+class PreIterator implements Iterator<Person>{
+     Stack<Person> stack;
+     public PreIterator(Person root){
+         stack = new Stack<>();
+         if(root != null){
+             stack.push(root);
+         }
+     }
+
+     @Override
+     public boolean hasNext(){
+         return !stack.isEmpty();
+     }
+
+     @Override
+     public Person next(){
+
+         Person cur = stack.pop();
+
+         if(cur.right!=null)
+             stack.push(cur.right);
+
+         if(cur.left!=null)
+             stack.push(cur.left);
+
+         return cur;
+     }
+
+ }
+ ```
