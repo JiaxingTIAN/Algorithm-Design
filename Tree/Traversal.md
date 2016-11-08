@@ -185,6 +185,8 @@ public int diameter(TreeNode n){
 ```
 
 ##PreOrder Traversal Iterator
+
+**It is separated Binary Tree Preorder traversal**
 ```java
 class PreIterator implements Iterator<Person>{
      Stack<Person> stack;
