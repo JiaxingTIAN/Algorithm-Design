@@ -7,7 +7,7 @@ public TreeNode successor(TreeNode root, TreeNode p) {
     return null;
 
   if (root.val <= p.val) {
-    return successor(root.right, p);
+    return successor(root.right, p);  //smaller search for right subtree
   } else {
     TreeNode left = successor(root.left, p);
     return (left != null) ? left : root;
