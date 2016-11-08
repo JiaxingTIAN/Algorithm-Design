@@ -172,6 +172,8 @@ public int width(TreeNode root){
 }
 ```
 ##Diameter of BT
+
+Longest Path between two leaf
 ```java
 public int diameter(TreeNode n){
     if(n == null)
