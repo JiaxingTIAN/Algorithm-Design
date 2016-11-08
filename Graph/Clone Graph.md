@@ -1,25 +1,27 @@
-//DFS
+#DFS
+```java
 public class Solution {
     HashMap<Integer, UndirectedGraphNode> map = new HashMap();
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
         return clone(node);
     }
     private UndirectedGraphNode clone(UndirectedGraphNode node) {
-        if (node == null) return null;
-        
-        if (map.containsKey(node.label)) {
-            return map.get(node.label);
-        }
+        if(node == null)
+            return null;
+        if(map.containsKey(node.label))
+            return map.get(node.label); //Already has a copy
+        //Otherwise make a new copy
         UndirectedGraphNode clone = new UndirectedGraphNode(node.label);
-        map.put(clone.label, clone);
-        for (UndirectedGraphNode neighbor : node.neighbors) {
-            clone.neighbors.add(clone(neighbor));
-        }
+        map.put(node.label, clone); //Put into the map
+        for(UndirectedGraphNode nei:node.neighbors) //Add all neighbors
+            clone.neighbors.add(clone(nei));
         return clone;
     }
  
 }
-//BFS
+```
+#BFS
+```java
 public class SolutionBFS {
   pulic UndirectedGraph graphClone(UndirectedGraphNode node){
     if(node==null) return null;
@@ -45,3 +47,4 @@ public class SolutionBFS {
     return head;
   }
 }
+```
