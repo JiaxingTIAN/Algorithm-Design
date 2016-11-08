@@ -1,4 +1,6 @@
 #Successor
+
+Smallest number that is greater than given number
 ```java
 public TreeNode successor(TreeNode root, TreeNode p) {
   if (root == null)
@@ -13,6 +15,8 @@ public TreeNode successor(TreeNode root, TreeNode p) {
 }
 ```
 #Predecessor
+
+Largest number that is smaller than given number
 ```java
 public TreeNode predecessor(TreeNode root, TreeNode p) {
   if (root == null)
