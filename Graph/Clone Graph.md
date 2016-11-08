@@ -23,28 +23,32 @@ public class Solution {
 #BFS
 ```java
 public class SolutionBFS {
-  pulic UndirectedGraph graphClone(UndirectedGraphNode node){
-    if(node==null) return null;
+  public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        //return clone(node);
+        if(node == null)
+            return null;
         Queue<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();   //BFS
-        HashMap<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap();  //Record the visited node, hashmap for speed
+        HashMap<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap();  //Keep the origin and copy
         UndirectedGraphNode head = new UndirectedGraphNode(node.label); //return new head
-        queue.add(node); map.put(node, head);
+        queue.add(node);        //For bfs start point to be visited
+        map.put(node, head);    //put the copy into map
         while(!queue.isEmpty()){
-            UndirectedGraphNode cur = queue.remove();
-            List<UndirectedGraphNode> adj = cur.neighbors; //get all its neighbors
-            for(UndirectedGraphNode nei:adj){   //chech if already in the HachMap, visited
-                if(!map.containsKey(nei)){  //if not, visit the node by copy to a new node and add them to the HashMap
-                    queue.add(nei); //add to the queue for BFS
-                    UndirectedGraphNode n = new UndirectedGraphNode(nei.label); //Clone the node
-                    map.put(nei, n);    //add to the hashmap to mark as visited no need to clone again
-                    map.get(cur).neighbors.add(n);  //add the node to the neighbors of the orginal node, clone the edge
-                }else{
-                    map.get(cur).neighbors.add(map.get(nei));   //already in hashmap, visited, cloned node before
-                    //just add edge this time
+            UndirectedGraphNode cur = queue.poll(); //Poll one out of the queue to visit
+            List<UndirectedGraphNode> adj = cur.neighbors; //traverse all its neighbors
+            for(UndirectedGraphNode nei:adj){
+                if(map.containsKey(nei))    //visited before has copy
+                    map.get(cur).neighbors.add(map.get(nei));   //Add the copy to neighbor
+                else{
+                    //No copy before make a new copy and put in map
+                    UndirectedGraphNode clone = new UndirectedGraphNode(nei.label);
+                    queue.offer(nei);   //Not visited before Add to be visited
+                    map.put(nei, clone);
+                    map.get(cur).neighbors.add(clone);
                 }
             }
         }
-    return head;
+        return head;
+    }
   }
 }
 ```
