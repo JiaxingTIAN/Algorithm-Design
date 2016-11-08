@@ -34,7 +34,7 @@ class PeekIterator implements Iterator<Integer>{
     }
 }
 ```
-#Flatten List Iterator 
+#Flatten List Iterator ZigZag order
 iterator to achieve next hasnext,flatten list 交替输出 [[7 8 9] 95[] [2 3 5] [1 19]] ---> 7 2 1 8 3 19
 Use a queue to store the iterators of lists initialize with all the iterator of the nested lists
 hasNext return if the queue is empty
@@ -69,7 +69,53 @@ class FlattenIterator implements Iterator<Integer>{
      }
  }
  ```
- 
+#Flatten List Iterator 
+Implement an iterator to flatten a 2d vector.
+
+For example,
+Given 2d vector =
+```
+[
+  [1,2],
+  [3],
+  [4,5,6]
+]
+```
+By calling next repeatedly until hasNext returns false, the order of elements returned by next should be: [1,2,3,4,5,6].
+
+**ALG**
+
+Implement use two iterator, one for the list of list, one for the current list
+
+```java
+public class Vector2D implements Iterator<Integer> {
+    Iterator<List<Integer>> iterList;
+    Iterator<Integer> iter;
+    public Vector2D(List<List<Integer>> vec2d) {
+        iterList = vec2d.iterator();
+    }
+
+    @Override
+    public Integer next() {
+        if(!hasNext())
+            return null;
+        return iter.next();
+    }
+
+    @Override
+    public boolean hasNext() {
+        while((iter == null || !iter.hasNext()) && iterList.hasNext())
+            iter = iterList.next().iterator();  //When iter is null or reach end keep find
+        return iter != null && iter.hasNext();
+    }
+}
+/**
+ * Your Vector2D object will be instantiated and called as such:
+ * Vector2D i = new Vector2D(vec2d);
+ * while (i.hasNext()) v[f()] = i.next();
+ */
+```
+
 #Merge Sorted Data Stream Iterator
 Implement a iterator to output the sorted data stream in ascending order
 Similar with PriorityQueue and wrapper iterator with peek 
