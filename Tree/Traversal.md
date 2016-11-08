@@ -148,3 +148,26 @@ public class Solution {
     }
 }
 ```
+##Width of BT with depth k
+```java
+public int width(TreeNode n, int depth){
+    if(n == null)
+      return 0;
+    if(depth == 0)
+      return 1;
+    return width(n.left, depth-1) + width(n.right, depth-1);
+}
+public int height(TreeNode n){
+    if(n == null)
+      return -1;
+    return Math.max(height(n.left), height(n.right)) + 1;
+}
+public int width(TreeNode root){
+    int max = 0;
+    int h = height(root);
+    for(int i=0; i<=h; i++){
+        max = Math.max(max, width(root, i));
+    }
+    return max;
+}
+```
