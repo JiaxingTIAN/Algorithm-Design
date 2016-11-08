@@ -171,3 +171,12 @@ public int width(TreeNode root){
     return max;
 }
 ```
+##Diameter of BT
+```java
+public int diameter(TreeNode n){
+    if(n == null)
+        return 0;
+    int l1 = height(n.left) + height(n.right) + 3;  //Go through current root
+    int l2 = Math.max(diameter(n.left), diameter(n.right)); //Dont go through root
+    return Math.max(l1, l2);
+}
