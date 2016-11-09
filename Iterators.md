@@ -313,7 +313,7 @@ Separated Preorder traversal
 ##Jump Iterator
 
 Jump every item
-```
+```java
  class JumpIter implements Iterator<Integer>{
      Iterator<Integer> it;
      public JumpIter(Iterator<Integer> it){
