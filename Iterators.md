@@ -240,4 +240,97 @@ public class BSTIterator {
 }
 
  ```
+ ##EvenIterator
  
+ Output only even number 
+ 
+ ```java
+ 
+ class EvenIterator implements Iterator<Integer>{
+     Integer tmp;
+     Iterator<Integer> it;
+     public EvenIterator(List<Integer> list){
+         it = list.iterator();
+         while((tmp == null || tmp%2 != 0) && it.hasNext())
+             tmp = it.next();
+         if(tmp!=null && tmp%2 != 0)
+             tmp = null;
+     }
+     @Override
+     public boolean hasNext(){
+         return tmp != null;
+     }
+     @Override
+     public Integer next(){
+         if(!hasNext())
+             return null;
+         int e = tmp;
+         tmp = null;
+         while((tmp == null || tmp % 2 != 0) && it.hasNext())
+             tmp = it.next();
+         if(tmp != null && tmp % 2 != 0)
+             tmp = null;
+         return e;
+     }
+ }
+
+```
+##PreOrder Iterator of BT
+Separated Preorder traversal
+
+```java
+ class PreIterator implements Iterator<Person>{
+     Stack<Person> stack;
+     public PreIterator(Person root){
+         stack = new Stack<>();
+         if(root != null){
+             stack.push(root);
+         }
+     }
+
+     @Override
+     public boolean hasNext(){
+         return !stack.isEmpty();
+     }
+
+     @Override
+     public Person next(){
+
+         Person cur = stack.pop();
+
+         if(cur.right!=null)
+             stack.push(cur.right);
+
+         if(cur.left!=null)
+             stack.push(cur.left);
+
+         return cur;
+     }
+
+ }
+```
+
+##Jump Iterator
+
+Jump every item
+```
+ class JumpIter implements Iterator<Integer>{
+     Iterator<Integer> it;
+     public JumpIter(Iterator<Integer> it){
+         this.it = it;
+         if(it.hasNext())   //Jump if has next
+             it.next();
+     }
+     public boolean hasNext(){
+         return it.hasNext();
+     }
+     public Integer next(){
+         if(!hasNext())
+             return null;
+         int next = it.next();
+         if(it.hasNext())   //Jump each time after calling next
+             it.next();
+         return next;
+     }
+ }
+ ```
