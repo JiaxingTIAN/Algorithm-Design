@@ -84,6 +84,8 @@ public class Solution {
             res.add(map.get(i));
         }
         return res;
+      
+        // Tree Map is slower use hash map and record the min and max value
         // Map<Integer, List<Integer>> map = new TreeMap<>();
         // while(!queue.isEmpty()){
         //     Node cur = queue.poll();
