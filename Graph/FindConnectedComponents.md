@@ -47,3 +47,41 @@ public class Solution {
     }
 }
 ```
+
+* BFS
+```java
+public class Solution {
+    /**
+     * @param nodes a array of Undirected graph node
+     * @return a connected set of a Undirected graph
+     */
+    public List<List<Integer>> connectedSet(ArrayList<UndirectedGraphNode> nodes) {
+        // Write your code here
+        List<List<Integer>> res = new ArrayList<>();
+        Set<UndirectedGraphNode> set = new HashSet<>();
+        for(UndirectedGraphNode n:nodes){
+            if(set.contains(n)) continue;
+            List<Integer> list = new ArrayList<>();
+            bfs(n, list, set);
+            Collections.sort(list);
+            res.add(list);
+        }
+        return res;
+    }
+    public void bfs(UndirectedGraphNode n, List<Integer> list, Set<UndirectedGraphNode> set){
+        Queue<UndirectedGraphNode> queue = new LinkedList<>();
+        queue.offer(n);
+        set.add(n);
+        while(!queue.isEmpty()){
+            UndirectedGraphNode cur = queue.poll();
+            list.add(cur.label);
+            for(UndirectedGraphNode nei:cur.neighbors){
+                if(set.contains(nei))   continue;
+                queue.offer(nei);
+                set.add(nei);
+            }
+        }
+    }
+}
+```
+
