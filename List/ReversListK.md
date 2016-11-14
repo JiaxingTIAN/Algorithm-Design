@@ -54,34 +54,35 @@ public class Solution {
  */
 public class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
-       if(head == null || head.next == null || k == 1)
+        if(head == null || head.next == null || k == 1)
             return head;
         ListNode d = new ListNode(0);
         d.next = head;
         ListNode start = d;
-        int i = 0;
+        int idx = 0;
         while(head != null){
-            i++;
-            if(i%k == 0){
+            idx++;
+            if(idx % k == 0){   //reverse when end of k
                 start = reverse(start, head.next);
-                head = start.next;
-            }else{
+                head = start.next;  //Update start and go forward 
+            }else{  //forward if not reverse
                 head = head.next;
             }
         }
         return d.next;
     }
     public ListNode reverse(ListNode start, ListNode end){
-        ListNode pre = end;
-        ListNode cur = start.next, first = start.next;
-        while(cur!= end){
+        ListNode pre = end; //Previous node for reverse
+        ListNode first = start.next;    //First is to be returned, first.next = end
+        ListNode cur = start.next;  //Frontier
+        while(cur != end){
             ListNode tmp = cur.next;
             cur.next = pre;
             pre = cur;
             cur = tmp;
         }
-        start.next = pre;
-        return first;
+        start.next = pre;   //After reverse previous will be head
+        return first;   //Origin head will be tail
     }
 }
 ```
