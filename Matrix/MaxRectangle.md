@@ -31,34 +31,31 @@ public class Solution {
         if(matrix == null || matrix.length == 0 || matrix[0].length == 0)
             return 0;
         int n = matrix.length, m = matrix[0].length;
-        
-        int[] left = new int[m];
-        int[] right = new int[m];
-        int[] height = new int[m];
-        int max = 0;
+        int[]left = new int[m];     //Default all 0
+        int[]right = new int[m];    //Default all m
+        int[]height = new int[m];   //Default all 0
         Arrays.fill(right, m);
-        for(int i = 0; i < n ; i++){
-            int l = 0, r = m;
-            for(int j = m-1; j >= 0; j--){
-                if(matrix[i][j] == '1')
+        int max = 0;
+        for(int i=0; i < n; i++){   //Preceed through row by row
+            int l = 0, r = m;   // left and right of current row
+            for(int j = m-1; j>=0; j--){
+                if(matrix[i][j] == '1'){
                     right[j] = Math.min(r, right[j]);
-                else{
+                }else{
                     right[j] = m;
-                    r = j;  //padding at the end
+                    r = j;  //point to 0
                 }
             }
             for(int j = 0; j < m; j++){
-                if(matrix[i][j] == '1'){   //Update left and height
-                    left[j] = Math.max(l, left[j]);
+                if(matrix[i][j] == '1'){
                     height[j]++;
-                }
-                else{
+                    left[j] = Math.max(left[j], l);
+                }else{
                     height[j] = 0;
                     left[j] = 0;
-                    l = j + 1;
+                    l = j + 1;  //Point to 1
                 }
-                //System.out.println("L: " + left[j] + "R: " + right[j] + "H: " + height[j]);
-                max = Math.max(max, (right[j] - left[j]) * height[j]);
+                max = Math.max(max, (right[j] - left[j])*height[j]);
             }
         }
         return max;
