@@ -29,7 +29,7 @@ public class Solution {
     public List<List<Integer>> connectedSet(ArrayList<UndirectedGraphNode> nodes) {
         // Write your code here
         List<List<Integer>> res = new ArrayList<>();
-        Set<UndirectedGraphNode> set = new HashSet<>();
+        Set<UndirectedGraphNode> set = new HashSet<>(); //Visit List
         for(UndirectedGraphNode n:nodes){
             if(set.contains(n))
                 continue;
@@ -61,12 +61,12 @@ public class Solution {
     public List<List<Integer>> connectedSet(ArrayList<UndirectedGraphNode> nodes) {
         // Write your code here
         List<List<Integer>> res = new ArrayList<>();
-        Set<UndirectedGraphNode> set = new HashSet<>();
-        for(UndirectedGraphNode n:nodes){
+        Set<UndirectedGraphNode> set = new HashSet<>(); //Visited Set
+        for(UndirectedGraphNode n:nodes){ //Find connected Component for each node
             if(set.contains(n)) continue;
             List<Integer> list = new ArrayList<>();
             bfs(n, list, set);
-            Collections.sort(list);
+            Collections.sort(list); //Sort to order
             res.add(list);
         }
         return res;
