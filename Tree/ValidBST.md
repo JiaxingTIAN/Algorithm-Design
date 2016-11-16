@@ -94,3 +94,49 @@ public class Solution {
     }
 }
 ```
+
+#Recover BST 
+
+The is one pair of node switched in the BST, find the nodes and recover BST.
+
+* Use TreeNode first, second to record the 2 misplaced nodes
+* Use TreeNode pre to store the previous node if node.val <= pre.val then invalid
+* The first invalid is the larger one in the previous, the second is the smaller one in node
+
+>For example, in order traverse 1,5,3,4,2,6 -> the first one is previous node, the second invalid one is current node
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    TreeNode first = null;
+    TreeNode second = null;
+    TreeNode pre = null;
+    public void recoverTree(TreeNode root) {
+        if(root == null)
+            return;
+        inorder(root);
+        int tmp = first.val;
+        first.val = second.val;
+        second.val = tmp;
+    }
+    
+    public void inorder(TreeNode node){
+        if(node == null)
+            return;
+        inorder(node.left);
+        if(pre!=null && first == null && node.val <= pre.val)
+            first = pre;
+        if(first != null && node.val <= pre.val)
+            second = node;
+        pre = node;
+        inorder(node.right);
+    }
+}
+```
