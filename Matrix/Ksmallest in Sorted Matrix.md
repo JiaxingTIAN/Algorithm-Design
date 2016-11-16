@@ -1,6 +1,6 @@
 #Kth Smallest in Sorted Matrix
 
-* Solution 1 : Heap - O(KlogN)
+* Solution 1 : Heap - O(N + KlogN)
 
 Here is the step of my solution:
 
