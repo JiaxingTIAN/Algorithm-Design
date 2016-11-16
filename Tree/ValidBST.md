@@ -30,3 +30,22 @@ public class Solution {
     }
 }
 ```
+* Inorder Traversal -- Better Version
+
+Record a previous node to compare as Globel variable
+
+```java
+public class Solution{
+    TreeNode pre = null;
+    public boolean isValid(TreeNode root){
+        if(root == null) 
+            return true;
+        if(!isValid(root.left))
+            return false;
+        if(pre != null && pre.val >= root.val)
+            return false;
+        pre = root;
+        return isValid(root.right);
+    }
+}
+```
