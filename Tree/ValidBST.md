@@ -1,3 +1,9 @@
+#Valid BST
+
+* PreOrder traversal update min and max value each time
+* for overflow problem use Long.MIN_VLAUE and Long.MAX_VALUE;
+
+```java
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -23,3 +29,4 @@ public class Solution {
         return valid(node.left, min, node.val) && valid(node.right, node.val, max);
     }
 }
+```
