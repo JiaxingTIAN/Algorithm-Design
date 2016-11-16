@@ -104,6 +104,8 @@ The is one pair of node switched in the BST, find the nodes and recover BST.
 * The first invalid is the larger one in the previous, the second is the smaller one in node
 
 >For example, in order traverse 1,5,3,4,2,6 -> the first one is previous node, the second invalid one is current node
+
+
 ```java
 /**
  * Definition for a binary tree node.
