@@ -45,6 +45,7 @@ For example,
 Given [[0, 30],[5, 10],[15, 20]],
 return 2.
 ```
+Sweep Line
 
 ```java
 /**
