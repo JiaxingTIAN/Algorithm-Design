@@ -1,4 +1,4 @@
-#Valid BST
+#Validate BST
 
 * PreOrder traversal update min and max value each time
 * for overflow problem use Long.MIN_VLAUE and Long.MAX_VALUE;
@@ -46,6 +46,30 @@ public class Solution{
             return false;
         pre = root;
         return isValid(root.right);
+    }
+}
+```
+
+* InOrder Traversal Iterative
+
+```java
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+        TreeNode pre = null;
+        Stack<TreeNode> stack = new Stack<>();
+        while( root!= null || !stack.isEmpty()){
+            while(root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if(pre != null && pre.val >= root.val){
+                return false;
+            }
+            pre = root;
+            root = root.right;
+        }
+        return true;
     }
 }
 ```
