@@ -10,7 +10,7 @@ c) Replace a character
 
 * Algorithm
 
-```
+
 f(i, j) := minimum cost (or steps) required to convert first i characters of word1 to first j characters of word2
 
 Case 1: word1[i] == word2[j], i.e. the ith the jth character matches.
@@ -31,7 +31,7 @@ Above equations become the recursive definitions for DP.
 Base Case:
 
 f(0, k) = f(k, 0) = k
-```
+
 
 ```java
 public class Solution {
