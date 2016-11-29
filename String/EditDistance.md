@@ -21,9 +21,9 @@ f(i, j) = f(i - 1, j - 1)
 Case 2: word1[i] != word2[j], then we must either insert, delete or replace, whichever is cheaper
 
 f(i, j) = 1 + min { f(i, j - 1), f(i - 1, j), f(i - 1, j - 1) }
-f(i, j - 1) represents insert operation
-f(i - 1, j) represents delete operation
-f(i - 1, j - 1) represents replace operation
+f(i, j - 1) represents insert j after i, i+1 match with j => need match i with j-1
+f(i - 1, j) represents delete i, need match i-1 with j
+f(i - 1, j - 1) represents replace i with j, need match i-1 and j-1
 Here, we consider any operation from word1 to word2. It means, when we say insert operation,
 we insert a new character after word1 that matches the jth character of word2. 
 So, now have to match i characters of word1 to j - 1 characters of word2. Same goes for other 
