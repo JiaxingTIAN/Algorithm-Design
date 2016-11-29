@@ -29,10 +29,13 @@ Return false (not self crossing)
 ```
 
 Categorize the self-crossing scenarios, there are 3 of them: 
+
 1. Fourth line crosses first line and works for fifth line crosses second line and so on...
 stands for current loop cross
+
 2. Fifth line meets first line and works for the lines after
 stands for overlap
+
 3. Sixth line crosses first line and works for the lines after
 stands for cross loop crossing
 
