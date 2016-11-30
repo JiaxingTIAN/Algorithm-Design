@@ -14,28 +14,28 @@ If there are multiple such windows, you are guaranteed that there will always be
 
 * Use Sliding Window => Time Complexity O(n)
 ```java
-public class Solution{
-    public String minWindowString(String s, String t){
+public class Solution {
+    public String minWindow(String s, String t) {
         String res = "";
-        if(s == null || t == null || s.lenght() == 0 || t.length() == 0)
+        if(s == null || t == null || s.length() == 0 || t.length() == 0)
             return res;
         int n = s.length(), m = t.length();
         int min = Integer.MAX_VALUE;
-        
+
         int[]count = new int[256];  //Store the count for character in t
         for(char c:t.toCharArray())
             count[c]++;
-        
+
         for(int i = 0, j = 0; j < n; j++){   //Sliding window i to j, forward j each time
             if(count[s.charAt(j)]-- > 0)     //Character in t will be > 0, not in t will be = 0
                 m--;    //Character  not in t will be smaller than 0
-            while(n == 0){  //Move i forward
+            while(m == 0){  //Move i forward
                 if(j - i + 1 < min){
                     res = s.substring(i, j + 1);
                     min = j - i + 1;
                 }
                 if(count[s.charAt(i++)]++ == 0)
-                    n++;
+                    m++;
             }
         }
         return res;
