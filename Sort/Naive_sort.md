@@ -32,4 +32,38 @@ public void insertionSort(int[]data){
         data[j] = insert
     }
 }
-            
+```
+
+# Merge Sort
+
+* Average Case: O(nlogn)
+
+```java
+public void mergeSort(int[]data, int lo, int hi){
+    if(lo >= hi)
+        return;
+    int mid = (lo + hi)/2;
+    mergeSort(data, lo, mid);
+    mergeSort(data, mid+1, hi);
+    merge(data, lo, hi);
+}
+public void merge(int[]data, int lo, int mid, int hi){
+    int l = lo, r = mid + 1;
+    int idx = 0;
+    int[] tmp = new int[l - r + 1];
+    while(l <= mid && r <= hi){
+        if(data[l] < data[r])
+            tmp[idx++] = data[l++];
+        else
+            tmp[idx++] = data[r++];
+    }
+    
+    while(l <= mid)
+        tmp[idx++] = data[l++];
+    while(r <= hi)
+        tmp[idx++] = data[r++];
+    
+    System.arraycopy(tmp, 0, data, lo, hi - lo + 1);
+}
+    
+    
