@@ -16,6 +16,8 @@ A solution set is:
   [2, 2, 3]
 ]
 ```
+
+Algorithm using backtrack and recursion
 ```java
 public class Solution {
     List<List<Integer>> res = new LinkedList<>();
