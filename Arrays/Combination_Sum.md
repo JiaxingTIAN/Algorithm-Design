@@ -20,31 +20,27 @@ A solution set is:
 Algorithm using backtrack and recursion
 ```java
 public class Solution {
-    List<List<Integer>> res = new LinkedList<>();
-    public List<List<Integer>> combinationSum(int[] cands, int target) {
-        //DFS backtrack approach
-        Arrays.sort(cands);
-        List<Integer> list = new LinkedList<>();
-        findNum(list, cands, 0, target, 0);
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> res = new ArrayList<>();
+        dfs(res, new ArrayList<>(), candidates, target, 0);
         return res;
     }
     
-    public void findNum(List nums, int[] candidates, int sum, int target, int start){
-        
-        if(sum == target) {
-            res.add(new LinkedList(nums));
+    public void dfs(List<List<Integer>> res, List<Integer> list, int[] can, int target, int idx){
+        if(target == 0){    //No duplicate, return after reach zero
+            res.add(new ArrayList<>(list));
             return;
         }
-        if(sum>target){
-            return;
+        if(target < 0){
+            return; //Sorted, return when smaller than zero
         }
-        //Skip the rest of candidates when sum is larger than target since sorted
-        for(int i = start;i<candidates.length && sum + candidates[i] <= target;i++){
-            nums.add(candidates[i]);
-            findNum(nums, candidates, sum+candidates[i], target, i);    //pass i since i can be reused
-            nums.remove(nums.size()-1);
+        for(int i = idx; i < can.length; i++){  
+            //Start from idx, since any element can be used unlimited times
+            list.add(can[i]);
+            dfs(res, list, can, target - can[i], i);
+            list.remove(list.size() - 1);
         }
-       
     }
 }
 ```
