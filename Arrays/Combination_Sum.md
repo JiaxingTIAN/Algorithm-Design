@@ -17,7 +17,12 @@ A solution set is:
 ]
 ```
 
-Algorithm using backtrack and recursion
+**Algorithm using backtrack and recursion**
+
+Sort the array first to terminate when target is smaller than 0
+
+Time complexity is O(target^length)
+
 ```java
 public class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
@@ -63,6 +68,8 @@ A solution set is:
 ]
 ```
 ** Similar to previous but ignore same index **
+Skip when idx > start and candidates[idx] == candidates[idx - 1] to avoid duplication
+Time complexity 2^N
 ```java
 public class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
