@@ -67,7 +67,7 @@ A solution set is:
   [1, 1, 6]
 ]
 ```
-** Similar to previous but ignore same index **
+**Similar to previous but ignore same index.**
 Skip when idx > start and candidates[idx] == candidates[idx - 1] to avoid duplication
 Time complexity 2^N
 ```java
